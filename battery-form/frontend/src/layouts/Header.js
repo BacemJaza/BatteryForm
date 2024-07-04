@@ -2,8 +2,8 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div className="navbar bg-base-100 mb-[5%]">
-    <div className="flex-1">
+    <div className="navbar bg-[#52C5EF] mb-[5%] text-white">
+    <div className="flex-1 ">
         <a className="btn btn-ghost text-xl">Battery Passport Dashboard</a>
     </div>
     <div className="flex-none">

@@ -3,9 +3,9 @@ import { BrowserRouter as Router, RouterProvider, Routes, createBrowserRouter } 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NotFoundPage from './pages/NotFoundPage';
-import FormulairePerformanceDurability from './components/performanceanddurability';
-import FormulaireDesignCircularity from './components/designofcircularity';
-import FormulaireSupplychain from './components/supplychain';
+import FormulairePerformanceDurability from './components/formComponents/performanceanddurability';
+import FormulaireDesignCircularity from './components/formComponents/designofcircularity';
+import FormulaireSupplychain from './components/formComponents/supplychain';
 
 function App() {
   const router = createBrowserRouter([
