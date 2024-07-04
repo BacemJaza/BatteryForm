@@ -1,7 +1,9 @@
 import React from 'react';
+import Headline from '../layouts/headline';
 
 function FormulaireSupplychain() {
     return (
+        <div><Headline /> {/* Intégration de Headline ici */}
         <div className="max-w-md mx-auto mt-8 p-6 bg-blue-50 rounded shadow-lg">
             <h2 className="text-xl font-bold mb-4">Supply Chain Due Diligence</h2>
             <form>
@@ -26,6 +28,7 @@ function FormulaireSupplychain() {
         <button className="btn btn-secondary px-8 py-3">Cancel</button>
       </div>
             </form>
+        </div>
         </div>
     );
 }

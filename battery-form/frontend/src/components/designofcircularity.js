@@ -1,7 +1,9 @@
 import React from 'react';
+import Headline from '../layouts/headline';
 
 function FormulaireDesignCircularity() {
   return (
+    <div><Headline /> {/* Intégration de Headline ici */}
     <div className="max-w-3xl mx-auto mt-8 p-6 bg-blue-50 rounded shadow-lg">
       <h2 className="text-xl font-bold mb-4 text-center">Design de Circularity</h2>
 
@@ -45,11 +47,11 @@ function FormulaireDesignCircularity() {
             <div className="flex items-center space-x-4">
               <label className="text-sm text-gray-700 w-48">Manual for removal of the battery from the appliance</label>
               <div className="relative flex items-center">
-                <input
-                  type="file"
-                  className="file-input hidden"
-                  id="fileInput1"
-                />
+              <input
+                    type="file"
+                    className="file-input hidden"
+                    id="fileInput5"
+                  />
                 <label
                   htmlFor="fileInput1"
                   className="btn btn-primary py-2 px-6 rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer ml-2"
@@ -246,6 +248,7 @@ function FormulaireDesignCircularity() {
         <button className="btn btn-primary px-8 py-3 mr-2">Submit</button>
         <button className="btn btn-secondary px-8 py-3">Cancel</button>
       </div>
+    </div>
     </div>
   );
 }
