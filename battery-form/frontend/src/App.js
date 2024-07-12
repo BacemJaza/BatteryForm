@@ -3,10 +3,11 @@ import { RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NotFoundPage from './pages/NotFoundPage';
-import FormulairePerformanceDurability from './components/performanceanddurability';
-import FormulaireDesignCircularity from './components/designofcircularity';
-import FormulaireSupplychain from './components/supplychain';
-import FormulaireGeneralinformation from './components/generalinformation';
+import FormulaireGeneralinformation from './components/formComponents/generalinformation';
+import FormulaireDesignCircularity from './components/formComponents/designofcircularity';
+import FormulairePerformanceDurability from './components/formComponents/performanceanddurability';
+import FormulaireSupplychain from './components/formComponents/supplychain';
+import Footerform from './layouts/footerform';
 
 // Création du router avec createBrowserRouter
 const router = createBrowserRouter([
@@ -38,7 +39,13 @@ const router = createBrowserRouter([
   {
     path: '/generalinformation',
     element: <FormulaireGeneralinformation />
-  }
+  },
+  {
+    path: '/footerform',
+    element: <Footerform />
+  },
+  
+
 ]);
 
 function App() {
