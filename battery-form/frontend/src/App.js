@@ -8,6 +8,7 @@ import FormulaireDesignCircularity from './components/formComponents/designofcir
 import FormulairePerformanceDurability from './components/formComponents/performanceanddurability';
 import FormulaireSupplychain from './components/formComponents/supplychain';
 import Footerform from './layouts/footerform';
+import FormulaireBatteryComposition from './components/formComponents/batterymaterials';
 
 // Création du router avec createBrowserRouter
 const router = createBrowserRouter([
@@ -44,7 +45,10 @@ const router = createBrowserRouter([
     path: '/footerform',
     element: <Footerform />
   },
-  
+  {
+    path:'/batterySafetyRequirements',
+    element: <FormulaireBatteryComposition/>
+  }
 
 ]);
 

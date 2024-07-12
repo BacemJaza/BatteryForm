@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from '../layouts/Header'
 import Footer from '../layouts/Footer'
-import FormNav from '../components/FormNav'
-import PublishedBatteriesComponent from '../components/PublishedBatteriesComponent'
-import SavedBatteriesComponent from '../components/SavedBatteriesComponent'
+import FormNav from '../components/dashboardComponents/FormNav'
+import SavedBatteriesComponent from '../components/dashboardComponents/SavedBatteriesComponent'
+import PublishedBatteriesComponent from '../components/dashboardComponents/PublishedBatteriesComponent'
 
 const Dashboard = () => {
   return (
