@@ -6,29 +6,30 @@ import Footerform from '../../layouts/footerform';
 
 function FormulairePerformanceDurability() {
   const [progress, setProgress] = useState(0);
-  const navigate = useNavigate(); // Ajout de useNavigate pour la navigation
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
-    // Logique de soumission du formulaire ici
-    // Par exemple, envoyer les données au serveur
-    // et mettre à jour l'état de la progression
-    setProgress(100); // Marquer la progression comme terminée à 100%
-    // Ici, vous pouvez ajouter du code supplémentaire pour gérer la soumission du formulaire
+    setProgress(100);
+    // Logique de soumission ici
   };
 
   const handleCancel = () => {
-    // Logique d'annulation du formulaire ici
-    // Par exemple, réinitialiser les champs de formulaire
-    setProgress(0); // Réinitialiser la progression
-    // Ici, vous pouvez ajouter du code supplémentaire pour gérer l'annulation du formulaire
+    setProgress(0);
+    // Logique d'annulation ici
   };
 
-  
   const handlePrevious = () => {
-    console.log("Previous button clicked");
-    // Logique pour le bouton Previous
-    // Par exemple, naviguer vers la page précédente
-    navigate('/designofcircularity'); // Remplacez '/' par votre chemin de route réel
+    navigate('/batterymaterials');
+  };
+
+  const [tooltip, setTooltip] = useState({ expected: false, reference: false, cRate: false });
+
+  const handleMouseEnter = (type) => {
+    setTooltip((prev) => ({ ...prev, [type]: true }));
+  };
+
+  const handleMouseLeave = (type) => {
+    setTooltip((prev) => ({ ...prev, [type]: false }));
   };
 
   return (
@@ -45,40 +46,99 @@ function FormulairePerformanceDurability() {
           <h3 className="text-lg font-semibold mb-2">Battery lifetime</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
             <div className="flex flex-col space-y-4">
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Expected lifetime: Number of charge-discharge cycles</label>
+              <div className="flex items-center space-x-4 relative">
+                <label
+                  className="text-sm text-gray-700 w-48 cursor-pointer"
+                  onMouseEnter={() => handleMouseEnter('expected')}
+                  onMouseLeave={() => handleMouseLeave('expected')}
+                >
+                  Expected lifetime: Number of charge-discharge cycles
+                  {tooltip.expected && (
+                    <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+                      Expected battery lifetime expressed in cycles. The exception for non-cycle applications in Article
+                      10 appears sensible, but is not included in the Annex XIII provision. The data attribute is defined
+                      by measurement conditions of the cycle-life test such as the C-Rate and the depth of
+                      discharge in the cycle-life test.
+                    </span>
+                  )}
+                </label>
                 <input
                   type="text"
                   placeholder="Type here"
                   className="input input-bordered input-primary w-full max-w-xs"
                 />
               </div>
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Cycle-life reference test</label>
+              <div className="flex items-center space-x-4 relative">
+                <label
+                  className="text-sm text-gray-700 w-48 cursor-pointer"
+                  onMouseEnter={() => handleMouseEnter('reference')}
+                  onMouseLeave={() => handleMouseLeave('reference')}
+                >
+                  Cycle-life reference test
+                  {tooltip.reference && (
+                    <span className="absolute top-0 -left-56 ml-2 mt-2 w-48 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+                      Specification of the applied cycle-life test.
+                    </span>
+                  )}
+                </label>
                 <input
                   type="text"
                   placeholder="Type here"
                   className="input input-bordered input-primary w-full max-w-xs"
                 />
               </div>
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">C-rate of relevant cycle-life test</label>
+              <div className="flex items-center space-x-4 relative">
+                <label
+                  className="text-sm text-gray-700 w-48 cursor-pointer"
+                  onMouseEnter={() => handleMouseEnter('cRate')}
+                  onMouseLeave={() => handleMouseLeave('cRate')}
+                >
+                  C-rate of relevant cycle-life test
+                  {tooltip.cRate && (
+                    <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+                      Measurement parameter: Applied charge and discharge rate (C-rate) of relevant cycle-life test.
+                    </span>
+                  )}
+                </label>
                 <input
                   type="text"
                   placeholder="Type here"
                   className="input input-bordered input-primary w-full max-w-xs"
                 />
               </div>
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Capacity threshold for exhaustion</label>
+              <div className="flex items-center space-x-4 relative">
+                <label
+                  className="text-sm text-gray-700 w-48 cursor-pointer"
+                  onMouseEnter={() => handleMouseEnter('capacityThreshold')}
+                  onMouseLeave={() => handleMouseLeave('capacityThreshold')}
+                >
+                  Capacity threshold for exhaustion
+                  {tooltip.capacityThreshold && (
+                    <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+                      Interpreted as minimum percentage of rated capacity, above which the battery is still considered operational as EV battery in its current life. The value has to be provided by the economic operator.
+                    </span>
+                  )}
+                </label>
                 <input
                   type="text"
                   placeholder="Type here"
                   className="input input-bordered input-primary w-full max-w-xs"
                 />
               </div>
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">SOCE threshold for exhaustion</label>
+
+              <div className="flex items-center space-x-4 relative">
+                <label
+                  className="text-sm text-gray-700 w-48 cursor-pointer"
+                  onMouseEnter={() => handleMouseEnter('soceThreshold')}
+                  onMouseLeave={() => handleMouseLeave('soceThreshold')}
+                >
+                  SOCE threshold for exhaustion
+                  {tooltip.soceThreshold && (
+                    <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+                      Derived as analogue to, and potential future replacement of “Capacity threshold for exhaustion”. Interpreted as minimum percentage of SOCE, above which the battery is still considered operational as EV battery in its current life. The value has to be provided by the economic operator. The SOCE standard is only applicable to electric vehicle batteries.
+                    </span>
+                  )}
+                </label>
                 <input
                   type="text"
                   placeholder="Type here"
@@ -183,17 +243,8 @@ function FormulairePerformanceDurability() {
                   className="input input-bordered input-primary w-full max-w-xs"
                 />
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Sous-formulaire 4: Internal resistance */}
-        <div className="mb-8 bg-white rounded-lg p-4 shadow-sm">
-          <h3 className="text-lg font-semibold mb-2">Internal resistance</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
-            <div className="flex flex-col space-y-4">
               <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Initial internal resistance on battery cell level</label>
+                <label className="text-sm text-gray-700 w-48">Temperature range in operation (lower boundary)</label>
                 <input
                   type="text"
                   placeholder="Type here"
@@ -201,65 +252,7 @@ function FormulairePerformanceDurability() {
                 />
               </div>
               <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Initial internal resistance on battery pack level</label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Sous-formulaire 5: Round trip energy efficiency & self-discharge */}
-        <div className="mb-8 bg-white rounded-lg p-4 shadow-sm">
-          <h3 className="text-lg font-semibold mb-2">Round trip energy efficiency & self-discharge</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
-            <div className="flex flex-col space-y-4">
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Initial self-discharging rate</label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
-              </div>
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Initial round trip energy efficiency</label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
-              </div>
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Round trip energy efficiency at 50% of cycle life</label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Sous-formulaire 6: Negative events */}
-        <div className="mb-8 bg-white rounded-lg p-4 shadow-sm">
-          <h3 className="text-lg font-semibold mb-2">Negative events</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
-            <div className="flex flex-col space-y-4">
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Information on accidents</label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
-              </div>
-              <div className="flex items-center space-x-4">
-                <label className="text-sm text-gray-700 w-48">Number of deep discharge events</label>
+                <label className="text-sm text-gray-700 w-48">Temperature range in operation (upper boundary)</label>
                 <input
                   type="text"
                   placeholder="Type here"
@@ -279,8 +272,7 @@ function FormulairePerformanceDurability() {
       <div className="flex justify-center mt-4 space-x-4">
         <button onClick={handlePrevious} className="btn btn-gray px-2 py-2 mr-1">Previous</button>
       </div>
-       {/* Intégration du FooterForm à la fin de la page */}
-       <div className="mt-8"> {/* Ajout d'une marge supérieure pour l'espace */}
+      <div className="mt-8">
         <Footerform />
       </div>
     </div>
