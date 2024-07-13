@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Headline from '../../layouts/headline';
-import Footerform from '../../layouts/footerform';
+import Headline from '../../layouts/form/headline';
+import Footerform from '../../layouts/form/footerform';
 import ProgressBar from './progressbare';
 
 function FormulaireGeneralinformation() {
@@ -132,7 +132,7 @@ function FormulaireGeneralinformation() {
     <div className="mt-8">
       <Headline />
       <div className="mt-8">
-        <ProgressBar />
+        <ProgressBar progress="1"/>
       </div>
       <div className="max-w-3xl mx-auto mt-8 p-6 bg-blue-50 rounded shadow-lg">
         <h2 className="text-xl font-bold mb-4 text-center">General Information</h2>

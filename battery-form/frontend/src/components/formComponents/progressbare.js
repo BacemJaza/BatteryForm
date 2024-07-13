@@ -1,27 +1,25 @@
 import React from 'react';
 
-const ProgressBar = ({ currentStep }) => {
+const ProgressBar = ({ progress }) => {
+  console.log(progress)
   const steps = [
-    { text: 'General Information', className: 'step step-info', color: 'bg-blue-500' },
-    { text: 'Supply Chain Due Diligence', className: 'step step-info', color: 'bg-green-500' },
-    { text: 'Design of Circularity', className: 'step step-info', color: 'bg-yellow-500' },
-    { text: 'Battery Materials and Composition', className: 'step step-info', color: 'bg-purple-500' },
-    { text: 'Performance and Durability', className: 'step step-info', color: 'bg-red-500' },
+    { text: 'General Information'},
+    { text: 'Supply Chain Due Diligence'},
+    { text: 'Design of Circularity' },
+    { text: 'Battery Materials and Composition'},
+    { text: 'Performance and Durability'},
   ];
 
   // Calculer la largeur maximale pour aligner les titres
   const maxTextLength = steps.reduce((max, step) => Math.max(max, step.text.length), 0);
 
   return (
-    <ul className="steps flex">
+    <ul className="steps flex justify-center">
       {steps.map((step, index) => (
-        <li key={index} className={`${step.className} ${index <= currentStep ? 'font-bold' : 'font-normal'}`}>
+        <li key={index} className={`step step-info ${index+1<progress? 'step-info':'step-warning'}`}>
           <div className="flex items-center">
-            <span style={{ minWidth: `${maxTextLength}ch` }}>{step.text}</span>
+            <span style={{ minWidth: `${maxTextLength}ch`}} className='font-bold'>{step.text}</span>
           </div>
-          {index !== steps.length - 1 && (
-            <div className={`mx-4 h-6 ${index < currentStep ? step.color : 'bg-gray-300'} flex-1 self-center`}></div>
-          )}
         </li>
       ))}
     </ul>

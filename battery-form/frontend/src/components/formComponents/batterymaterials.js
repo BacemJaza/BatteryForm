@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Headline from '../../layouts/headline';
-import Footerform from '../../layouts/footerform';
+import Headline from '../../layouts/form/headline';
+import Footerform from '../../layouts/form/footerform';
 import ProgressBar from './progressbare';
 
 function FormulaireBatteryMaterials() {
@@ -114,7 +114,7 @@ function FormulaireBatteryMaterials() {
     <div className="mt-8">
       <Headline />
       <div className="mt-8">
-        <ProgressBar />
+        <ProgressBar progress="4"/>
       </div>
       <div className="max-w-3xl mx-auto mt-8 p-6 bg-blue-50 rounded shadow-lg">
         <h2 className="text-xl font-bold mb-4 text-center">Battery materials and composition</h2>
@@ -168,9 +168,9 @@ function FormulaireBatteryMaterials() {
             <div className="flex items-center space-x-4">
               <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of the cathode, anode, electrolyte materials</label>
               <div className='flex gap-5 justify-center w-[45%]'>
-                <div className='border-4 p-2'><button type="button" id='cathode' onClick={handleShowDescription}>Cathode</button></div>
-                <div className='border-4 p-2'><button type="button" id='anode' onClick={handleShowDescription}>Anode</button></div>
-                <div className='border-4 p-2'><button type="button" id='electrolyte' onClick={handleShowDescription}>Electrolyte</button></div>
+                <button className='btn' type="button" id='cathode' onClick={handleShowDescription}>Cathode</button>
+                <button className='btn' type="button" id='anode' onClick={handleShowDescription}>Anode</button>
+                <button className='btn' type="button" id='electrolyte' onClick={handleShowDescription}>Electrolyte</button>
               </div>
             </div>
             {showDescription=="cathode"&&

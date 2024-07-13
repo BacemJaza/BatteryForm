@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Headline from '../../layouts/headline';
+import Headline from '../../layouts/form/headline';
 import ProgressBar from './progressbare';
-import Footerform from '../../layouts/footerform';
+import Footerform from '../../layouts/form/footerform';
 
 function FormulaireSupplychain() {
   const [progress, setProgress] = useState(0);
@@ -37,7 +37,7 @@ function FormulaireSupplychain() {
     <div>
       <Headline /> {/* Intégration de Headline ici */}
       <div className="mt-8">
-        <ProgressBar progress={progress} />
+        <ProgressBar progress="2" />
       </div>
 
       <div className="max-w-md mx-auto mt-8 p-6 bg-blue-50 rounded shadow-lg">

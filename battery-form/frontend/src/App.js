@@ -8,7 +8,8 @@ import FormulaireDesignCircularity from './components/formComponents/designofcir
 import FormulairePerformanceDurability from './components/formComponents/performanceanddurability';
 import FormulaireSupplychain from './components/formComponents/supplychain';
 import FormulaireBatteryMaterials from './components/formComponents/batterymaterials';
-import Footerform from './layouts/footerform';
+import Footerform from './layouts/form/footerform';
+import PublishedPassport from './components/formComponents/publishedPassport';
 
 // Création du router avec createBrowserRouter
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: '/footerform',
     element: <Footerform />
+  },
+  {
+    path: '/publishedpassport',
+    element: <PublishedPassport />
   },
  
 ]);

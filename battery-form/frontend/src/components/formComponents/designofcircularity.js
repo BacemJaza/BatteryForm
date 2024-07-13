@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Headline from '../../layouts/headline';
+import Headline from '../../layouts/form/headline';
 import ProgressBar from './progressbare';
-import Footerform from '../../layouts/footerform';
+import Footerform from '../../layouts/form/footerform';
 
 function FormulaireDesignCircularity() {
   const [progress, setProgress] = useState(0);
@@ -41,7 +41,7 @@ function FormulaireDesignCircularity() {
     <div className="mt-8">
       <Headline />
       <div className="mt-8">
-        <ProgressBar progress={progress} />
+        <ProgressBar progress="3" />
       </div>
       <div className="max-w-3xl mx-auto mt-8 p-6 bg-blue-50 rounded shadow-lg">
         <h2 className="text-xl font-bold mb-4 text-center">Design de Circularity</h2>
