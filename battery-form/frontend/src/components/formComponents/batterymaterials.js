@@ -16,6 +16,10 @@ function FormulaireBatteryMaterials() {
   const [locationOfHazardousSubstances, setLocationOfHazardousSubstances] = useState('');
   const [concentrationRangeOfHazardousSubstances, setConcentrationRangeOfHazardousSubstances] = useState('');
   const [impactOfSubstancesOnTheEnvironmentHumanHealthSafety, setImpactOfSubstancesOnTheEnvironmentHumanHealthSafety] = useState('');
+  const [cathodeDescription, setCathodeDescription] = useState("");
+  const [anodeDescription, setAnodeDescription] = useState("")
+  const [electrolyteDescription, setElectrolyteDescription] = useState("")
+  const [showDescription, setShowDescription] = useState("cathode")
 
   const navigate = useNavigate();
 
@@ -62,7 +66,19 @@ function FormulaireBatteryMaterials() {
   const handleImpactOfSubstancesOnTheEnvironmentHumanHealthSafetyChange = (event) => {
     setImpactOfSubstancesOnTheEnvironmentHumanHealthSafety(event.target.value);
   };
-
+  const handleShowDescription = (event)=>{
+    console.log(event.target.id)
+    setShowDescription(event.target.id)
+  }
+  const handleCathodeDescription = (event)=>{
+    setCathodeDescription(event.target.value)
+  }
+  const handleAnodeDescription = (event)=>{
+    setAnodeDescription(event.target.value)
+  }
+  const handleElectrolyteDescription = (event)=>{
+    setElectrolyteDescription(event.target.value)
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Submitted:', {
@@ -151,15 +167,52 @@ function FormulaireBatteryMaterials() {
             </div>
             <div className="flex items-center space-x-4">
               <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of the cathode, anode, electrolyte materials</label>
-              <input
-                type="text"
-                id="compositionOfTheCathodeAnodeElectrolyteMaterials"
-                value={compositionOfTheCathodeAnodeElectrolyteMaterials}
-                onChange={handleCompositionOfTheCathodeAnodeElectrolyteMaterialsChange}
-                className="input input-bordered input-primary w-full max-w-xs"
-                required
-              />
+              <div className='flex gap-5 justify-center w-[45%]'>
+                <div className='border-4 p-2'><button type="button" id='cathode' onClick={handleShowDescription}>Cathode</button></div>
+                <div className='border-4 p-2'><button type="button" id='anode' onClick={handleShowDescription}>Anode</button></div>
+                <div className='border-4 p-2'><button type="button" id='electrolyte' onClick={handleShowDescription}>Electrolyte</button></div>
+              </div>
             </div>
+            {showDescription=="cathode"&&
+             <div className="flex items-center space-x-4">
+             <label className="text-sm text-gray-700 w-64">Description of {showDescription}</label>
+             <textarea
+               type="text"
+               id={`${showDescription}Description`}
+               value={cathodeDescription}
+               onChange={handleCathodeDescription}
+               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+               required
+             />
+           </div>
+            }
+            {showDescription=="anode"&&
+             <div className="flex items-center space-x-4">
+             <label className="text-sm text-gray-700 w-64">Description of {showDescription}</label>
+             <textarea
+               type="text"
+               id={`${showDescription}Description`}
+               value={anodeDescription}
+               onChange={handleAnodeDescription}
+               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+               required
+             />
+           </div>
+            }
+            {showDescription=="electrolyte"&&
+             <div className="flex items-center space-x-4">
+             <label className="text-sm text-gray-700 w-64">Description of {showDescription}</label>
+             <textarea
+               type="text"
+               id={`${showDescription}Description`}
+               value={electrolyteDescription}
+               onChange={handleElectrolyteDescription}
+               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+               required
+             />
+           </div>
+            }
+           
             <div className="flex items-center space-x-4">
               <label htmlFor="nameOfHazardousSubstances" className="text-sm text-gray-700 w-64">Name of hazardous substances</label>
               <input
