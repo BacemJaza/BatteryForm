@@ -27,7 +27,7 @@ function FormulaireDesignCircularity() {
     // Logique pour le bouton Next
     console.log("Next button clicked");
     // Par exemple, naviguer vers une autre page
-    navigate('/batterySafetyRequirements'); // Remplacez '/batterySafetyRequirements' par votre chemin de route réel
+    navigate('/batterymaterials'); // Remplacez '/batterySafetyRequirements' par votre chemin de route réel
   };
 
   const handlePrevious = () => {

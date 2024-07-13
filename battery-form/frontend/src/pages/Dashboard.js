@@ -12,7 +12,7 @@ const Dashboard = () => {
       <div>
         <FormNav/>
         <SavedBatteriesComponent/>
-        <PublishedBatteriesComponent/>
+        {/* <PublishedBatteriesComponent/> */}
       </div>
       <Footer/>
     </div>

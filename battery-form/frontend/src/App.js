@@ -7,8 +7,8 @@ import FormulaireGeneralinformation from './components/formComponents/generalinf
 import FormulaireDesignCircularity from './components/formComponents/designofcircularity';
 import FormulairePerformanceDurability from './components/formComponents/performanceanddurability';
 import FormulaireSupplychain from './components/formComponents/supplychain';
+import FormulaireBatteryMaterials from './components/formComponents/batterymaterials';
 import Footerform from './layouts/footerform';
-import FormulaireBatteryComposition from './components/formComponents/batterymaterials';
 
 // Création du router avec createBrowserRouter
 const router = createBrowserRouter([
@@ -42,14 +42,14 @@ const router = createBrowserRouter([
     element: <FormulaireGeneralinformation />
   },
   {
+    path: '/batterymaterials',
+    element: <FormulaireBatteryMaterials />
+  },
+  {
     path: '/footerform',
     element: <Footerform />
   },
-  {
-    path:'/batterySafetyRequirements',
-    element: <FormulaireBatteryComposition/>
-  }
-
+ 
 ]);
 
 function App() {
