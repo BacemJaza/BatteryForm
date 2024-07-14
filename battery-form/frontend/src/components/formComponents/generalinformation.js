@@ -128,6 +128,31 @@ function FormulaireGeneralinformation() {
     navigate('/supplychain'); // Remplacez '/performanceanddurability' par votre chemin de route réel
   };
 
+  const [tooltip, setTooltip] = useState({ 
+    batteryPassport: false, 
+    Batteryidentification:false,
+    Batterystatus:false,
+    Manufactureridentification:false,
+    EUdeclarationofconformity:false,
+    IDofEUdeclarationofconformity:false,
+    Resultsoftestsreports:false,
+    Separatecollectionsymbol:false,
+    Cadmiumandleadsymbols:false,
+    carbonfootprintperformanceclass:false,
+    CO2footprint:false
+   
+
+  });
+
+  const handleMouseEnter = (type) => {
+    setTooltip((prev) => ({ ...prev, [type]: true }));
+  };
+
+  const handleMouseLeave = (type) => {
+    setTooltip((prev) => ({ ...prev, [type]: false }));
+  };
+
+
   return (
     <div className="mt-8">
       <Headline />
@@ -139,29 +164,56 @@ function FormulaireGeneralinformation() {
 
         <form onSubmit={handleSubmit} className="bg-white rounded-lg p-4 shadow-sm">
           <div className="grid grid-cols-1 gap-4">
-            <div className="flex items-center space-x-4">
-              <label htmlFor="batteryPassportIdentification" className="text-sm text-gray-700 w-64">Battery passport identification:</label>
-              <input
-                type="text"
-                id="batteryPassportIdentification"
-                value={batteryPassportIdentification}
-                onChange={handleBatteryPassportIdentificationChange}
-                className="input input-bordered input-primary w-full max-w-xs"
-                required
-              />
-            </div>
+          <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('batteryPassport')}
+                 onMouseLeave={() => handleMouseLeave('batteryPassport')}
+  >
+                Battery passport identification:
+              {tooltip.batteryPassport && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               Unique identifier allowing for the unambiguous identification of each individual battery and hence each corresponding battery passport.
+              </span>
+               )}
+                </label>
+                <input
+               type="text"
+               id="batteryPassportIdentification"
+               value={batteryPassportIdentification}
+               onChange={handleBatteryPassportIdentificationChange}
+               className="input input-bordered input-primary w-full max-w-xs"
+               required
+                  />
+                </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="batteryIdentification" className="text-sm text-gray-700 w-64">Battery identification:</label>
-              <input
-                type="text"
-                id="batteryIdentification"
-                value={batteryIdentification}
-                onChange={handleBatteryIdentificationChange}
-                className="input input-bordered input-primary w-full max-w-xs"
-                required
-              />
-            </div>
+                <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Batteryidentification')}
+                 onMouseLeave={() => handleMouseLeave('Batteryidentification')}
+  >
+               Battery identification
+              {tooltip.Batteryidentification && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               Model identification and batch or serial number, or product number or another element allowing their identification
+              </span>
+               )}
+                </label>
+                <input
+               type="text"
+               id="batteryPassportIdentification"
+               value={batteryPassportIdentification}
+               onChange={handleBatteryPassportIdentificationChange}
+               className="input input-bordered input-primary w-full max-w-xs"
+               required
+                  />
+                </div>
+
+
+            
 
             <div className="flex items-center space-x-4">
               <label htmlFor="batteryCategory" className="text-sm text-gray-700 w-64">Battery category:</label>
@@ -180,8 +232,20 @@ function FormulaireGeneralinformation() {
               </select>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="batteryStatus" className="text-sm text-gray-700 w-64">Battery status:</label>
+           < div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Batterystatus')}
+                 onMouseLeave={() => handleMouseLeave('Batterystatus')}
+  >
+                Battery status
+              {tooltip.Batterystatus && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               Lifecycle status of the battery.
+              </span>
+               )}
+                </label>
               <select
                 id="batteryStatus"
                 value={batteryStatus}
@@ -198,17 +262,29 @@ function FormulaireGeneralinformation() {
               </select>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="manufacturerId" className="text-sm text-gray-700 w-64">Manufacturer’s identification:</label>
-              <input
-                type="text"
-                id="manufacturerId"
-                value={manufacturerId}
-                onChange={handleManufacturerIdChange}
-                className="input input-bordered input-primary w-full max-w-xs"
-                required
-              />
-            </div>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Manufactureridentification')}
+                 onMouseLeave={() => handleMouseLeave('Manufactureridentification')}
+  >
+               Manufacturer’s identification
+              {tooltip.Manufactureridentification && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               Unambiguous identification of the manufacturer of the battery, suggested via a unique operator identifier
+              </span>
+               )}
+                </label>
+                <input
+               type="text"
+               id="batteryPassportIdentification"
+               value={batteryPassportIdentification}
+               onChange={handleBatteryPassportIdentificationChange}
+               className="input input-bordered input-primary w-full max-w-xs"
+               required
+                  />
+                </div>
 
             <div className="flex items-center space-x-4">
               <label htmlFor="manufacturingDate" className="text-sm text-gray-700 w-64">Manufacturing date:</label>
@@ -246,8 +322,20 @@ function FormulaireGeneralinformation() {
               />
             </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="euDeclarationFile" className="text-sm text-gray-700 w-64">EU declaration of conformity:</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('EUdeclarationofconformity')}
+                 onMouseLeave={() => handleMouseLeave('EUdeclarationofconformity')}
+  >
+                EU declaration of conformity
+              {tooltip.EUdeclarationofconformity && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               EU declaration of conformity signed by responsible economic operators to declare compliance with the regulatory requirements in the context of the market conformity assessment procedure and assume full responsibility.
+              </span>
+               )}
+                </label>
               <input
                 type="file"
                 id="euDeclarationFile"
@@ -258,8 +346,20 @@ function FormulaireGeneralinformation() {
               />
             </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="idEuDeclaration" className="text-sm text-gray-700 w-64">ID of EU declaration of conformity:</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('IDofEUdeclarationofconformity')}
+                 onMouseLeave={() => handleMouseLeave('IDofEUdeclarationofconformity')}
+  >
+                ID of EU declaration of conformity
+              {tooltip.IDofEUdeclarationofconformity && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               Identification number of the EU declaration of conformity of the battery
+              </span>
+               )}
+                </label>
               <input
                 type="text"
                 id="idEuDeclaration"
@@ -270,8 +370,20 @@ function FormulaireGeneralinformation() {
               />
             </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="testReportsFile" className="text-sm text-gray-700 w-64">Test reports:</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Resultsoftestsreports')}
+                 onMouseLeave={() => handleMouseLeave('Resultsoftestsreports')}
+  >
+                Results of tests reports
+              {tooltip.Resultsoftestsreports && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               Results of tests reports proving compliance in the market conformity assessment procedure with the requirements as per the technical documentation
+              </span>
+               )}
+                </label>
               <input
                 type="file"
                 id="testReportsFile"
@@ -282,8 +394,20 @@ function FormulaireGeneralinformation() {
               />
             </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="separateCollectionSymbol" className="text-sm text-gray-700 w-64">Separate collection symbol:</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Separatecollectionsymbol')}
+                 onMouseLeave={() => handleMouseLeave('Separatecollectionsymbol')}
+  >
+                Separate collection symbol 
+              {tooltip.Separatecollectionsymbol && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               "Separate collection" or "WEEE label" indicating that a product should not be discarded as unsorted waste but must be sent to separate collection facilities for recovery and recycling.
+              </span>
+               )}
+                </label>
               <input
                 type="file"
                 id="separateCollectionSymbol"
@@ -294,8 +418,20 @@ function FormulaireGeneralinformation() {
               />
             </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="cadmiumLeadSymbol" className="text-sm text-gray-700 w-64">Cadmium/lead symbol:</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Cadmiumandleadsymbols')}
+                 onMouseLeave={() => handleMouseLeave('Cadmiumandleadsymbols')}
+  >
+                Cadmium and lead symbols 
+              {tooltip.Cadmiumandleadsymbols && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               Cadmium and lead symbols indicating the metal is contained in the battery above a defined threshold. 
+              </span>
+               )}
+                </label>
               <input
                 type="file"
                 id="cadmiumLeadSymbol"
@@ -306,8 +442,20 @@ function FormulaireGeneralinformation() {
               />
             </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="carbonFootprintClass" className="text-sm text-gray-700 w-64">Carbon footprint performance class:</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('carbonfootprintperformanceclass')}
+                 onMouseLeave={() => handleMouseLeave('carbonfootprintperformanceclass')}
+  >
+                carbon footprint performance class 
+              {tooltip.carbonfootprintperformanceclass && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               The carbon footprint performance class that the relevant battery model per manufacturing plant corresponds to.
+              </span>
+               )}
+                </label>
               <select
                 id="carbonFootprintClass"
                 value={carbonFootprintClass}
@@ -326,8 +474,20 @@ function FormulaireGeneralinformation() {
               </select>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <label htmlFor="co2Footprint" className="text-sm text-gray-700 w-64">CO2 footprint:</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('CO2footprint')}
+                 onMouseLeave={() => handleMouseLeave('CO2footprint')}
+  >
+                CO2 footprint 
+              {tooltip.CO2footprint && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               The carbon footprint of the battery, calculated as kg of carbon dioxide equivalent per one kWh of the total energy provided by the battery over its expected service life
+              </span>
+               )}
+                </label>
               <input
                 type="text"
                 id="co2Footprint"
