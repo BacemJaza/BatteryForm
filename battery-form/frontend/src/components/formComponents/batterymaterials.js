@@ -119,6 +119,27 @@ function FormulaireBatteryMaterials() {
     console.log(hazSub)
   }
 
+  const [tooltip, setTooltip] = useState({ 
+    BatteryrawMaterial: false, 
+    Relatedidentifiers:false,
+    Nameofhazardoussubstances:false,
+    Hazardclasses:false,
+    Relatedidentifiers:false,
+    Locationofhazardous:false,
+    Concentrationrange:false,
+    Impactofsubstances:false
+  
+
+  });
+
+  const handleMouseEnter = (type) => {
+    setTooltip((prev) => ({ ...prev, [type]: true }));
+  };
+
+  const handleMouseLeave = (type) => {
+    setTooltip((prev) => ({ ...prev, [type]: false }));
+  };
+
 
   return (
     <div className="mt-8">
@@ -153,8 +174,20 @@ function FormulaireBatteryMaterials() {
                 required
               />
             </div>
-            <div className="flex items-center space-x-4">
-              <label htmlFor="batteryRawMaterial" className="text-sm text-gray-700 w-64">Battery raw Material</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('BatteryrawMaterial')}
+                 onMouseLeave={() => handleMouseLeave('BatteryrawMaterial')}
+  >
+                Battery raw Material
+              {tooltip.BatteryrawMaterial && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               Raw materials being economically important and vulnerable to supply disruption. List of the Commission is subject to updating, at least every three years to reflect production, market and technological developments. The latest list will be made available via the Raw Materials Information System (RMIS) of the EU Science Hub. In the battery passport, all critical raw materials above a concentration of 0.1 % weight by weight within each (sub)-component of the battery should be specified in an aggregated way for the entire battery.
+              </span>
+               )}
+                </label>
               <input
                 type="text"
                 id="batteryRawMaterial"
@@ -164,8 +197,19 @@ function FormulaireBatteryMaterials() {
                 required
               />
             </div>
-            <div className="flex items-center space-x-4">
-              <label htmlFor="relatedIdentifiersOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related identifiers of the cathode, anode, electrolyte materials</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Relatedidentifiers')}
+                 onMouseLeave={() => handleMouseLeave('Relatedidentifiers')}
+  >Related identifiers of the cathode, anode, electrolyte materials
+              {tooltip.Relatedidentifiers && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               "Component materials used" (No. 17.a-c): CAS numbers of the materials (as a composition of substances) in cathode, anode, electrolyte.
+              </span>
+               )}
+                </label>
               <input
                 type="text"
                 id="relatedIdentifiersOfTheCathodeAnodeElectrolyteMaterials"
@@ -223,11 +267,22 @@ function FormulaireBatteryMaterials() {
            </div>
             }
            
-            <div className="flex space-x-4">
-              <label htmlFor="nameOfHazardousSubstances" className="text-sm text-gray-700 w-64">Name of hazardous substances</label>
-              <div className='flex flex-col mx-auto'>
+           <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Nameofhazardoussubstances')}
+                 onMouseLeave={() => handleMouseLeave('Nameofhazardoussubstances')}
+  >
+                Name of hazardous substances
+              {tooltip.Nameofhazardoussubstances && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+              "Hazardous substances" (No 20.a-e): Name (agreed substance nomenclature, e.g. IUPAC or chemical name) all hazardous substance (as “any substance that poses a threat to human health and the environment”). Suggested above 0.1 % weight by weight 
+              </span>
+               )}
+                </label>
                 {hazSub.map((item)=>
-                <input
+              <input
                 type="text"
                 id={"nameOfHazardousSubstances"+item}
                 value={nameOfHazardousSubstances}
@@ -242,8 +297,20 @@ function FormulaireBatteryMaterials() {
               </div>
               
             </div>
-            <div className="flex items-center space-x-4">
-              <label htmlFor="hazardClasses" className="text-sm text-gray-700 w-64">Hazard classes</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Hazardclasses')}
+                 onMouseLeave={() => handleMouseLeave('Hazardclasses')}
+  >
+                Hazard classes 
+              {tooltip.Hazardclasses && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+              "Hazardous substances" (No 20.a-e): Specify hazard classes and/ or categories of hazardous substances (as “any substance that poses a threat to human health and the environment”) as defined by the CLP Regulation.
+              </span>
+               )}
+                </label>
               <input
                 type="text"
                 id="hazardClasses"
@@ -253,8 +320,20 @@ function FormulaireBatteryMaterials() {
                 required
               />
             </div>
-            <div className="flex items-center space-x-4">
-              <label htmlFor="relatedIdentifiersOfHazardousSubstances" className="text-sm text-gray-700 w-64">Related identifiers of hazardous substances</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Relatedidentifiers')}
+                 onMouseLeave={() => handleMouseLeave('Relatedidentifiers')}
+  >
+                Related identifiers of hazardous substances 
+              {tooltip.Relatedidentifiers && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+              Hazardous substances" (No 20.a-e): CAS number and CLP Regulation index number of all hazardous substance (as “any substance that poses a threat to human health and the environment”).
+              </span>
+               )}
+                </label>
               <input
                 type="text"
                 id="relatedIdentifiersOfHazardousSubstances"
@@ -264,8 +343,20 @@ function FormulaireBatteryMaterials() {
                 required
               />
             </div>
-            <div className="flex items-center space-x-4">
-              <label htmlFor="locationOfHazardousSubstances" className="text-sm text-gray-700 w-64">Location of hazardous substances</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Locationofhazardous')}
+                 onMouseLeave={() => handleMouseLeave('Locationofhazardous')}
+  >
+                Location of hazardous substances
+              {tooltip.Locationofhazardous && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+             Hazardous substances" (No 20.a-e): Location on a (sub-)component-level of all hazardous substances (as “any substance that poses a threat to human health and the environment”). Suggested via a unique identifier or nomenclature.
+              </span>
+               )}
+                </label>
               <input
                 type="text"
                 id="locationOfHazardousSubstances"
@@ -275,8 +366,20 @@ function FormulaireBatteryMaterials() {
                 required
               />
             </div>
-            <div className="flex items-center space-x-4">
-              <label htmlFor="concentrationRangeOfHazardousSubstances" className="text-sm text-gray-700 w-64">Concentration range of hazardous substances</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Concentrationrange')}
+                 onMouseLeave={() => handleMouseLeave('Concentrationrange')}
+  >
+                Concentration range of hazardous substances
+              {tooltip.Concentrationrange && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+             Hazardous substances" (No 20.a-e): Concentration range of all hazardous substances (as “any substance that poses a threat to human health and the environment”) in %, per (sub-)component of the battery, based on SCIP concentration ranges in weight by weight.
+              </span>
+               )}
+                </label>
               <input
                 type="text"
                 id="concentrationRangeOfHazardousSubstances"
@@ -286,30 +389,40 @@ function FormulaireBatteryMaterials() {
                 required
               />
             </div>
-            <div className="flex space-x-4">
-              <label htmlFor="impactOfSubstancesOnTheEnvironmentHumanHealthSafety" className="text-sm text-gray-700 w-64">Impact of substances on the environment, human health, safety</label>
+            <div className="flex items-center space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Impactofsubstances')}
+                 onMouseLeave={() => handleMouseLeave('Impactofsubstances')}
+  >
+               Impact of substances on the environment, human health, safety
+              {tooltip.Impactofsubstances && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+             Impact statements based on, e.g., REACH or GHS for all hazard classes applicable to substances in the battery
+              </span>
+               )}
+                </label>
               <div className='flex'>
-              {hazSub.length==0?<div>No substances added.</div>:
-                  <div className='flex flex-col'>
-                    {hazSub.map(item=>
-                      <div className='flex pb-2'>
-                      <h2 className='flex items-center pr-2 mb-2'>#{item+1}:</h2>
-                      <input
-                      type="text"
-                      id="impactOfSubstancesOnTheEnvironmentHumanHealthSafety"
-                      value={impactOfSubstancesOnTheEnvironmentHumanHealthSafety}
-                      onChange={handleImpactOfSubstancesOnTheEnvironmentHumanHealthSafetyChange}
-                      className="input input-bordered input-primary w-full max-w-xs"
-                      required
-                      />
+                {hazSub.length==0?<div>No substances added.</div>:
+                    <div className='flex flex-col'>
+                      {hazSub.map(item=>
+                        <div className='flex pb-2'>
+                        <h2 className='flex items-center pr-2 mb-2'>#{item+1}:</h2>
+                        <input
+                        type="text"
+                        id="impactOfSubstancesOnTheEnvironmentHumanHealthSafety"
+                        value={impactOfSubstancesOnTheEnvironmentHumanHealthSafety}
+                        onChange={handleImpactOfSubstancesOnTheEnvironmentHumanHealthSafetyChange}
+                        className="input input-bordered input-primary w-full max-w-xs"
+                        required
+                        />
+                      </div>
+                      )}
                     </div>
-                    )}
-                  </div>
-                }
+                  }
               </div>
-              
             </div>
-          </div>
 
           {/* <div className="flex justify-center mt-6">
             <button type="submit" className="btn btn-primary px-8 py-3 mr-2">Submit</button>
