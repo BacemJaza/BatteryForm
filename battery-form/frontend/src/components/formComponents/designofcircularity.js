@@ -62,7 +62,7 @@ function FormulaireDesignCircularity() {
     <div className="mt-8">
       <Headline />
       <div className="mt-8">
-        <ProgressBar progress={progress} />
+        <ProgressBar progress="3" />
       </div>
       <div className="max-w-3xl mx-auto mt-8 p-6 bg-blue-50 rounded shadow-lg">
         <h2 className="text-xl font-bold mb-4 text-center">Design de Circularity</h2>
