@@ -339,10 +339,10 @@ function FormulaireGeneralinformation() {
             </div>
           </div>
 
-          <div className="flex justify-center mt-6">
+          {/* <div className="flex justify-center mt-6">
             <button type="submit" className="btn btn-primary px-8 py-3 mr-2">Submit</button>
             <button type="button" className="btn btn-secondary px-8 py-3">Cancel</button>
-          </div>
+          </div> */}
         </form>
       </div>
       <div className="flex justify-center mt-4 space-x-4">

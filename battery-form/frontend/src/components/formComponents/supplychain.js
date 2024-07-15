@@ -61,10 +61,10 @@ function FormulaireSupplychain() {
           </div>
        
           {/* Boutons de soumission et annulation */}
-          <div className="flex justify-center mt-4 space-x-4">
+          {/* <div className="flex justify-center mt-4 space-x-4">
             <button type="submit" className="btn btn-primary px-8 py-3">Submit</button>
             <button type="button" onClick={handleCancel} className="btn btn-secondary px-8 py-3">Cancel</button>
-          </div>
+          </div> */}
         </form>
       </div>
 

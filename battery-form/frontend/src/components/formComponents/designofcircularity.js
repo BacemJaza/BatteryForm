@@ -283,10 +283,10 @@ function FormulaireDesignCircularity() {
         </div>
 
         {/* Boutons de soumission et annulation */}
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           <button onClick={handleSubmit} className="btn btn-primary px-8 py-3 mr-2">Submit</button>
           <button onClick={handleCancel} className="btn btn-secondary px-8 py-3">Cancel</button>
-        </div>
+        </div> */}
       </div>
       {/* Boutons Next et Previous à la fin de la page */}
       <div className="flex justify-center mt-4 space-x-4">

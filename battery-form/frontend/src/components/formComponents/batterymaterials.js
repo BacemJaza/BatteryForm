@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Headline from '../../layouts/form/headline';
 import Footerform from '../../layouts/form/footerform';
 import ProgressBar from './progressbare';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function FormulaireBatteryMaterials() {
   const [batteryPassportIdentification, setBatteryPassportIdentification] = useState('');
@@ -20,6 +22,8 @@ function FormulaireBatteryMaterials() {
   const [anodeDescription, setAnodeDescription] = useState("")
   const [electrolyteDescription, setElectrolyteDescription] = useState("")
   const [showDescription, setShowDescription] = useState("cathode")
+  const [counter,setCounter] = useState(0)
+  const [hazSub,setHazSub] = useState([])
 
   const navigate = useNavigate();
 
@@ -67,7 +71,7 @@ function FormulaireBatteryMaterials() {
     setImpactOfSubstancesOnTheEnvironmentHumanHealthSafety(event.target.value);
   };
   const handleShowDescription = (event)=>{
-    console.log(event.target.id)
+    // console.log(event.target.id)
     setShowDescription(event.target.id)
   }
   const handleCathodeDescription = (event)=>{
@@ -108,6 +112,12 @@ function FormulaireBatteryMaterials() {
     // Par exemple, naviguer vers une autre page
     navigate('/designofcircularity'); // Remplacez '/generalInformation' par votre chemin de route réel
   };
+  const addInput = () =>{
+    setCounter(counter+1)
+    hazSub.push(counter)
+    setHazSub(hazSub)
+    console.log(hazSub)
+  }
 
 
   return (
@@ -213,16 +223,24 @@ function FormulaireBatteryMaterials() {
            </div>
             }
            
-            <div className="flex items-center space-x-4">
+            <div className="flex space-x-4">
               <label htmlFor="nameOfHazardousSubstances" className="text-sm text-gray-700 w-64">Name of hazardous substances</label>
-              <input
+              <div className='flex flex-col mx-auto'>
+                {hazSub.map((item)=>
+                <input
                 type="text"
-                id="nameOfHazardousSubstances"
+                id={"nameOfHazardousSubstances"+item}
                 value={nameOfHazardousSubstances}
                 onChange={handleNameOfHazardousSubstancesChange}
-                className="input input-bordered input-primary w-full max-w-xs"
+                className="input input-bordered input-primary mb-2"
                 required
               />
+                )}
+                
+                <button type='button' className="btn btn-primary w-fit m-2 flex mx-auto" onClick={addInput}><FontAwesomeIcon icon={faPlus} /></button>
+                
+              </div>
+              
             </div>
             <div className="flex items-center space-x-4">
               <label htmlFor="hazardClasses" className="text-sm text-gray-700 w-64">Hazard classes</label>
@@ -268,23 +286,35 @@ function FormulaireBatteryMaterials() {
                 required
               />
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex space-x-4">
               <label htmlFor="impactOfSubstancesOnTheEnvironmentHumanHealthSafety" className="text-sm text-gray-700 w-64">Impact of substances on the environment, human health, safety</label>
-              <input
-                type="text"
-                id="impactOfSubstancesOnTheEnvironmentHumanHealthSafety"
-                value={impactOfSubstancesOnTheEnvironmentHumanHealthSafety}
-                onChange={handleImpactOfSubstancesOnTheEnvironmentHumanHealthSafetyChange}
-                className="input input-bordered input-primary w-full max-w-xs"
-                required
-              />
+              <div className='flex'>
+              {hazSub.length==0?<div>No substances added.</div>:
+                  <div className='flex flex-col'>
+                    {hazSub.map(item=>
+                      <div className='flex pb-2'>
+                      <h2 className='flex items-center pr-2 mb-2'>#{item+1}:</h2>
+                      <input
+                      type="text"
+                      id="impactOfSubstancesOnTheEnvironmentHumanHealthSafety"
+                      value={impactOfSubstancesOnTheEnvironmentHumanHealthSafety}
+                      onChange={handleImpactOfSubstancesOnTheEnvironmentHumanHealthSafetyChange}
+                      className="input input-bordered input-primary w-full max-w-xs"
+                      required
+                      />
+                    </div>
+                    )}
+                  </div>
+                }
+              </div>
+              
             </div>
           </div>
 
-          <div className="flex justify-center mt-6">
+          {/* <div className="flex justify-center mt-6">
             <button type="submit" className="btn btn-primary px-8 py-3 mr-2">Submit</button>
             <button type="button" className="btn btn-secondary px-8 py-3">Cancel</button>
-          </div>
+          </div> */}
         </form>
       </div>
       {/* Boutons Next et Previous à la fin de la page */}
