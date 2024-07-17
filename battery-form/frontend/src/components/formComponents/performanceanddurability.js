@@ -22,6 +22,25 @@ function FormulairePerformanceDurability() {
     navigate('/batterymaterials');
   };
 
+  const [cRate, setCRate] = useState(''); // État pour gérer la valeur d'entrée
+  const [capacityThreshold, setCapacityThreshold] = useState(''); 
+  const [SOCEthresholdforexhaustion, setSOCEthresholdforexhaustion] = useState('');
+  const [Warrantyeriodofthebattery, setWarrantyeriodofthebattery] = useState('');
+  const [Ratedcapacity, setRatedcapacity] = useState('');
+  const [Nominalvoltage, setNominalvoltage] = useState('');
+  const [Minimumvoltage, setMinimumvoltage] = useState('');
+  const [Maximumvoltage, setMaximumvoltage] = useState('');
+  const [Originalpowercapability, setOriginalpowercapability] = useState('');
+  const [Maximumpermittedbatterypower, setMaximumpermittedbatterypower] = useState('');
+  const [lowerboundary, setlowerboundary] = useState('');
+  const [upperboundary, setupperboundary] = useState('');
+  const [Initialinternalresistanceonbatterycelllevel, setInitialinternalresistanceonbatterycelllevel] = useState('');
+  const [Initialinternalresistanceonbatterypacklevel, setInitialinternalresistanceonbatterypacklevel] = useState('');
+  const [Initialelfdischargingrate, setInitialelfdischargingrate] = useState('');
+  const [Initialroundtripenergyefficiency, setInitialroundtripenergyefficiency] = useState(''); 
+  const [Roundtrip, setRoundtrip] = useState('');
+
+
   const [tooltip, setTooltip] = useState({ 
     expected: false, 
     reference: false, 
@@ -119,11 +138,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+        <input
+          type="text"
+          placeholder="Type here"
+          value={cRate}
+          onChange={(e) => setCRate(e.target.value)}
+          className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+        />
+        {cRate && <span className="absolute right-4 top-2 text-gray-500">A/Ah</span>} {/* Unité affichée à l'intérieur */}
+      </div>
               </div>
               <div className="flex items-center space-x-4 relative">
                 <label
@@ -138,11 +162,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={capacityThreshold}
+                    onChange={(e) => setCapacityThreshold(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {capacityThreshold && <span className="absolute right-4 top-2 text-gray-500">%</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
 
               <div className="flex items-center space-x-4 relative">
@@ -158,11 +187,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={SOCEthresholdforexhaustion}
+                    onChange={(e) => setSOCEthresholdforexhaustion(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {SOCEthresholdforexhaustion && <span className="absolute right-4 top-2 text-gray-500">%</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
               <div className="flex items-center space-x-4 relative">
                 <label
@@ -178,12 +212,18 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Warrantyeriodofthebattery}
+                    onChange={(e) => setWarrantyeriodofthebattery(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Warrantyeriodofthebattery && <span className="absolute right-4 top-2 text-gray-500">Years</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
+
               <div className="flex items-center space-x-4 relative">
                 <label
                   className="text-sm text-gray-700 w-48 cursor-pointer"
@@ -225,35 +265,57 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Ratedcapacity}
+                    onChange={(e) => setRatedcapacity(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Ratedcapacity && <span className="absolute right-4 top-2 text-gray-500">Ah
+                    </span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
               <div className="flex items-center space-x-4">
                 <label className="text-sm text-gray-700 w-48">Nominal voltage</label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Nominalvoltage}
+                    onChange={(e) => setNominalvoltage(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Nominalvoltage && <span className="absolute right-4 top-2 text-gray-500">V</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
               <div className="flex items-center space-x-4">
                 <label className="text-sm text-gray-700 w-48">Minimum voltage</label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Minimumvoltage}
+                    onChange={(e) => setMinimumvoltage(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Minimumvoltage && <span className="absolute right-4 top-2 text-gray-500">V</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
               <div className="flex items-center space-x-4">
                 <label className="text-sm text-gray-700 w-48">Maximum voltage</label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Maximumvoltage
+                    }
+                    onChange={(e) => setMaximumvoltage(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Maximumvoltage && <span className="absolute right-4 top-2 text-gray-500">V</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
               <div className="flex items-center space-x-4 relative">
                 <label
@@ -268,11 +330,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Originalpowercapability}
+                    onChange={(e) => setOriginalpowercapability(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Originalpowercapability && <span className="absolute right-4 top-2 text-gray-500">W </span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
               <div className="flex items-center space-x-4 relative">
                 <label
@@ -287,11 +354,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Maximumpermittedbatterypower}
+                    onChange={(e) => setMaximumpermittedbatterypower(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Maximumpermittedbatterypower && <span className="absolute right-4 top-2 text-gray-500">W</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
             </div>
           </div>
@@ -315,11 +387,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={lowerboundary}
+                    onChange={(e) => setlowerboundary(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {lowerboundary && <span className="absolute right-4 top-2 text-gray-500">°C</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
               <div className="flex items-center space-x-4 relative">
                 <label
@@ -334,11 +411,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={upperboundary}
+                    onChange={(e) => setupperboundary(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {upperboundary && <span className="absolute right-4 top-2 text-gray-500">°C</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
             </div>
           </div>
@@ -363,11 +445,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Initialinternalresistanceonbatterycelllevel}
+                    onChange={(e) => setInitialinternalresistanceonbatterycelllevel(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Initialinternalresistanceonbatterycelllevel && <span className="absolute right-4 top-2 text-gray-500">Ohm</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
               <div className="flex items-center space-x-4 relative">
                 <label
@@ -383,11 +470,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Initialinternalresistanceonbatterypacklevel}
+                    onChange={(e) => setInitialinternalresistanceonbatterypacklevel(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Initialinternalresistanceonbatterypacklevel && <span className="absolute right-4 top-2 text-gray-500">Ohm</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
             </div>
           </div>
@@ -412,11 +504,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Initialelfdischargingrate}
+                    onChange={(e) => setInitialelfdischargingrate(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Initialelfdischargingrate && <span className="absolute right-4 top-2 text-gray-500">%/month</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
               <div className="flex items-center space-x-4 relative">
                 <label
@@ -432,11 +529,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Initialroundtripenergyefficiency}
+                    onChange={(e) => setInitialroundtripenergyefficiency(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Initialroundtripenergyefficiency && <span className="absolute right-4 top-2 text-gray-500">%</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
 
               <div className="flex items-center space-x-4 relative">
@@ -452,11 +554,16 @@ function FormulairePerformanceDurability() {
                     </span>
                   )}
                 </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+                <div className="relative w-full max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    value={Roundtrip}
+                    onChange={(e) => setRoundtrip(e.target.value)}
+                    className="input input-bordered input-primary w-full pr-16" // Ajuster le padding droit
+                  />
+                  {Roundtrip && <span className="absolute right-4 top-2 text-gray-500">%</span>} {/* Unité affichée à l'intérieur */}
+                </div>
               </div>
             </div>
           </div>
