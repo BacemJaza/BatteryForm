@@ -267,7 +267,7 @@ function FormulaireBatteryMaterials() {
            </div>
             }
            
-           <div className="flex items-center space-x-4 relative">
+           <div className="flex space-x-4 relative">
              <label
                  htmlFor="batteryPassportIdentification"
                  className="text-sm text-gray-700 w-64 cursor-pointer"
@@ -281,6 +281,7 @@ function FormulaireBatteryMaterials() {
               </span>
                )}
                 </label>
+                <div className='flex flex-col'>
                 {hazSub.map((item)=>
               <input
                 type="text"
@@ -293,7 +294,7 @@ function FormulaireBatteryMaterials() {
                 )}
                 
                 <button type='button' className="btn btn-primary w-fit m-2 flex mx-auto" onClick={addInput}><FontAwesomeIcon icon={faPlus} /></button>
-                
+                </div>
               </div>
               
             </div>
@@ -316,7 +317,7 @@ function FormulaireBatteryMaterials() {
                 id="hazardClasses"
                 value={hazardClasses}
                 onChange={handleHazardClassesChange}
-                className="input input-bordered input-primary w-full max-w-xs"
+                className="input input-bordered input-primary w-full max-w-xs mb-3"
                 required
               />
             </div>
@@ -339,7 +340,7 @@ function FormulaireBatteryMaterials() {
                 id="relatedIdentifiersOfHazardousSubstances"
                 value={relatedIdentifiersOfHazardousSubstances}
                 onChange={handleRelatedIdentifiersOfHazardousSubstancesChange}
-                className="input input-bordered input-primary w-full max-w-xs"
+                className="input input-bordered input-primary w-full max-w-xs mb-3"
                 required
               />
             </div>
@@ -362,7 +363,7 @@ function FormulaireBatteryMaterials() {
                 id="locationOfHazardousSubstances"
                 value={locationOfHazardousSubstances}
                 onChange={handleLocationOfHazardousSubstancesChange}
-                className="input input-bordered input-primary w-full max-w-xs"
+                className="input input-bordered input-primary w-full max-w-xs mb-3"
                 required
               />
             </div>
@@ -385,7 +386,7 @@ function FormulaireBatteryMaterials() {
                 id="concentrationRangeOfHazardousSubstances"
                 value={concentrationRangeOfHazardousSubstances}
                 onChange={handleConcentrationRangeOfHazardousSubstancesChange}
-                className="input input-bordered input-primary w-full max-w-xs"
+                className="input input-bordered input-primary w-full max-w-xs mb-3"
                 required
               />
             </div>
