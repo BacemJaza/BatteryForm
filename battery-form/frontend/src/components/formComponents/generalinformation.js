@@ -204,9 +204,9 @@ function FormulaireGeneralinformation() {
                 </label>
                 <input
                type="text"
-               id="batteryPassportIdentification"
-               value={batteryPassportIdentification}
-               onChange={handleBatteryPassportIdentificationChange}
+               id="batteryIdentification"
+               value={batteryIdentification}
+               onChange={handleBatteryIdentificationChange}
                className="input input-bordered input-primary w-full max-w-xs"
                required
                   />
@@ -278,9 +278,9 @@ function FormulaireGeneralinformation() {
                 </label>
                 <input
                type="text"
-               id="batteryPassportIdentification"
-               value={batteryPassportIdentification}
-               onChange={handleBatteryPassportIdentificationChange}
+               id="manufacturerId"
+               value={manufacturerId}
+               onChange={handleManufacturerIdChange}
                className="input input-bordered input-primary w-full max-w-xs"
                required
                   />
