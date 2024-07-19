@@ -1,19 +1,16 @@
-// routes/generalInformation.js
-
 const express = require('express');
 const router = express.Router();
-const GeneralInformation = require('../models/generalInformation');
+const GeneralInformation = require('../models/GeneralInformation');
 
-// Route POST pour créer une nouvelle entrée d'information générale
+// Route pour créer une nouvelle information générale
 router.post('/', async (req, res) => {
+  const generalInformation = new GeneralInformation(req.body);
   try {
-    const newGeneralInfo = new GeneralInformation(req.body);
-    const savedGeneralInfo = await newGeneralInfo.save();
-    res.status(201).json(savedGeneralInfo);
+    const newGeneralInformation = await generalInformation.save();
+    res.status(201).json(newGeneralInformation);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json({ message: err.message });
   }
 });
 
-// Exporter le router pour l'utiliser dans l'application principale
 module.exports = router;
