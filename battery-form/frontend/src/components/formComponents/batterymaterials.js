@@ -22,8 +22,10 @@ function FormulaireBatteryMaterials() {
   const [anodeDescription, setAnodeDescription] = useState("")
   const [electrolyteDescription, setElectrolyteDescription] = useState("")
   const [showDescription, setShowDescription] = useState("cathode")
-  const [counter,setCounter] = useState(0)
+  const [hazCounter,setHazCounter] = useState(0)
+  const [matCounter,setMatCounter] = useState(0)
   const [hazSub,setHazSub] = useState([])
+  const [rawMat,setRawMat] = useState([])
 
   const navigate = useNavigate();
 
@@ -49,6 +51,9 @@ function FormulaireBatteryMaterials() {
 
   const handleNameOfHazardousSubstancesChange = (event) => {
     setNameOfHazardousSubstances(event.target.value);
+  };
+  const handleRawMatChange = (event) => {
+    setRawMat(event.target.value);
   };
 
   const handleHazardClassesChange = (event) => {
@@ -112,11 +117,17 @@ function FormulaireBatteryMaterials() {
     // Par exemple, naviguer vers une autre page
     navigate('/designofcircularity'); // Remplacez '/generalInformation' par votre chemin de route réel
   };
-  const addInput = () =>{
-    setCounter(counter+1)
-    hazSub.push(counter)
+  const addInputHazSub = () =>{
+    setHazCounter(hazCounter+1)
+    hazSub.push(hazCounter)
     setHazSub(hazSub)
     console.log(hazSub)
+  }
+
+  const addInputRawMat = () =>{
+    setMatCounter(matCounter+1)
+    rawMat.push(matCounter)
+    setRawMat(rawMat)
   }
 
   const [tooltip, setTooltip] = useState({ 
@@ -163,40 +174,70 @@ function FormulaireBatteryMaterials() {
                 required
               />
             </div>
-            <div className="flex items-center space-x-4">
-              <label htmlFor="batterieComponent" className="text-sm text-gray-700 w-64">Batterie component</label>
-              <input
-                type="text"
-                id="batterieComponent"
-                value={batterieComponent}
-                onChange={handleBatterieComponentChange}
-                className="input input-bordered input-primary w-full max-w-xs"
-                required
-              />
-            </div>
-            <div className="flex items-center space-x-4 relative">
+            <div className="flex space-x-4 relative">
              <label
                  htmlFor="batteryPassportIdentification"
                  className="text-sm text-gray-700 w-64 cursor-pointer"
-                 onMouseEnter={() => handleMouseEnter('BatteryrawMaterial')}
-                 onMouseLeave={() => handleMouseLeave('BatteryrawMaterial')}
+                 onMouseEnter={() => handleMouseEnter('Nameofhazardoussubstances')}
+                 onMouseLeave={() => handleMouseLeave('Nameofhazardoussubstances')}
   >
-                Battery raw Material
-              {tooltip.BatteryrawMaterial && (
+                Batterie component
+              {/* {tooltip.Nameofhazardoussubstances && (
               <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
-               Raw materials being economically important and vulnerable to supply disruption. List of the Commission is subject to updating, at least every three years to reflect production, market and technological developments. The latest list will be made available via the Raw Materials Information System (RMIS) of the EU Science Hub. In the battery passport, all critical raw materials above a concentration of 0.1 % weight by weight within each (sub)-component of the battery should be specified in an aggregated way for the entire battery.
+              "Hazardous substances" (No 20.a-e): Name (agreed substance nomenclature, e.g. IUPAC or chemical name) all hazardous substance (as “any substance that poses a threat to human health and the environment”). Suggested above 0.1 % weight by weight 
               </span>
-               )}
+               )} */}
                 </label>
-              <input
+                <div className='flex flex-col'>
+                {hazSub.map((item,key)=>
+                <div key={key}>
+                  <input
                 type="text"
-                id="batteryRawMaterial"
-                value={batteryRawMaterial}
-                onChange={handleBatteryRawMaterialChange}
-                className="input input-bordered input-primary w-full max-w-xs"
+                
+                value={nameOfHazardousSubstances}
+                onChange={handleNameOfHazardousSubstancesChange}
+                className="input input-bordered input-primary mb-2"
                 required
               />
-            </div>
+                </div>
+              
+                )}
+                
+                <button type='button' className="btn btn-primary w-fit m-2 flex mx-auto" onClick={addInputHazSub}><FontAwesomeIcon icon={faPlus} /></button>
+                </div>
+              </div>
+            <div className="flex space-x-4 relative">
+             <label
+                 htmlFor="batteryPassportIdentification"
+                 className="text-sm text-gray-700 w-64 cursor-pointer"
+                 onMouseEnter={() => handleMouseEnter('Nameofhazardoussubstances')}
+                 onMouseLeave={() => handleMouseLeave('Nameofhazardoussubstances')}
+  >
+                Battery raw Material
+              {tooltip.Nameofhazardoussubstances && (
+              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
+               Raw materials being economically important and vulnerable to supply disruption. List of the Commission is subject to updating, at least every three years to reflect production, market and technological developments. The latest list will be made available via the Raw Materials Information System (RMIS) of the EU Science Hub. In the battery passport, all critical raw materials above a concentration of 0.1 % weight by weight within each (sub)-component of the battery should be specified in an aggregated way for the entire battery.
+               </span>
+               )}
+                </label>
+                <div className='flex flex-col'>
+                {rawMat.map((item,key)=>
+                <div key={key}>
+                  <input
+                type="text"
+                
+                value={batteryRawMaterial}
+                onChange={handleBatteryRawMaterialChange}
+                className="input input-bordered input-primary mb-2"
+                required
+              />
+                </div>
+              
+                )}
+                
+                <button type='button' className="btn btn-primary w-fit m-2 flex mx-auto" onClick={addInputRawMat}><FontAwesomeIcon icon={faPlus} /></button>
+                </div>
+              </div>
             <div className="flex items-center space-x-4 relative">
              <label
                  htmlFor="batteryPassportIdentification"
@@ -282,18 +323,21 @@ function FormulaireBatteryMaterials() {
                )}
                 </label>
                 <div className='flex flex-col'>
-                {hazSub.map((item)=>
-              <input
+                {hazSub.map((item,key)=>
+                <div key={key}>
+                  <input
                 type="text"
-                id={"nameOfHazardousSubstances"+item}
+                
                 value={nameOfHazardousSubstances}
                 onChange={handleNameOfHazardousSubstancesChange}
                 className="input input-bordered input-primary mb-2"
                 required
               />
+                </div>
+              
                 )}
                 
-                <button type='button' className="btn btn-primary w-fit m-2 flex mx-auto" onClick={addInput}><FontAwesomeIcon icon={faPlus} /></button>
+                <button type='button' className="btn btn-primary w-fit m-2 flex mx-auto" onClick={addInputHazSub}><FontAwesomeIcon icon={faPlus} /></button>
                 </div>
               </div>
               
@@ -407,8 +451,8 @@ function FormulaireBatteryMaterials() {
               <div className='flex'>
                 {hazSub.length==0?<div>No substances added.</div>:
                     <div className='flex flex-col'>
-                      {hazSub.map(item=>
-                        <div className='flex pb-2'>
+                      {hazSub.map((item,key)=>
+                        <div className='flex pb-2' key={key}>
                         <h2 className='flex items-center pr-2 mb-2'>#{item+1}:</h2>
                         <input
                         type="text"
