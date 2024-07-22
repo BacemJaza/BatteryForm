@@ -10,7 +10,6 @@ function FormulaireBatteryMaterials() {
   const [batteryPassportIdentification, setBatteryPassportIdentification] = useState('');
   const [batterieComponent, setBatterieComponent] = useState('');
   const [batteryRawMaterial, setBatteryRawMaterial] = useState('');
-  const [relatedIdentifiersOfTheCathodeAnodeElectrolyteMaterials, setRelatedIdentifiersOfTheCathodeAnodeElectrolyteMaterials] = useState('');
   const [compositionOfTheCathodeAnodeElectrolyteMaterials, setCompositionOfTheCathodeAnodeElectrolyteMaterials] = useState('');
   const [nameOfHazardousSubstances, setNameOfHazardousSubstances] = useState('');
   const [hazardClasses, setHazardClasses] = useState('');
@@ -24,8 +23,14 @@ function FormulaireBatteryMaterials() {
   const [showDescription, setShowDescription] = useState("cathode")
   const [hazCounter,setHazCounter] = useState(0)
   const [matCounter,setMatCounter] = useState(0)
+  const [compsCounter,setCompsCounter] = useState(0)
   const [hazSub,setHazSub] = useState([])
   const [rawMat,setRawMat] = useState([])
+  const [batteryComps,setBatteryComps] = useState([])
+  const [relatedIdCathode,setRelatedIdCathode] = useState("")
+  const [relatedIdAnode,setRelatedIdAnode] = useState("")
+  const [relatedIdElectrolyte,setRelatedIdElectrolyte] = useState("")
+
 
   const navigate = useNavigate();
 
@@ -34,20 +39,14 @@ function FormulaireBatteryMaterials() {
   };
 
   const handleBatterieComponentChange = (event) => {
-    setBatterieComponent(event.target.value);
+    setBatterieComponent(event.target.value)
   };
 
   const handleBatteryRawMaterialChange = (event) => {
+    console.log(event)
     setBatteryRawMaterial(event.target.value);
   };
 
-  const handleRelatedIdentifiersOfTheCathodeAnodeElectrolyteMaterialsChange = (event) => {
-    setRelatedIdentifiersOfTheCathodeAnodeElectrolyteMaterials(event.target.value);
-  };
-
-  const handleCompositionOfTheCathodeAnodeElectrolyteMaterialsChange = (event) => {
-    setCompositionOfTheCathodeAnodeElectrolyteMaterials(event.target.value);
-  };
 
   const handleNameOfHazardousSubstancesChange = (event) => {
     setNameOfHazardousSubstances(event.target.value);
@@ -88,13 +87,21 @@ function FormulaireBatteryMaterials() {
   const handleElectrolyteDescription = (event)=>{
     setElectrolyteDescription(event.target.value)
   }
+  const handleCathodeId = (event)=>{
+    setRelatedIdCathode(event.target.value)
+  }
+  const handleAnodeId = (event)=>{
+    setRelatedIdAnode(event.target.value)
+  }
+  const handleElectrolyteId = (event)=>{
+    setRelatedIdElectrolyte(event.target.value)
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Submitted:', {
       batteryPassportIdentification,
       batterieComponent,
       batteryRawMaterial,
-      relatedIdentifiersOfTheCathodeAnodeElectrolyteMaterials,
       compositionOfTheCathodeAnodeElectrolyteMaterials,
       nameOfHazardousSubstances,
       hazardClasses,
@@ -128,6 +135,12 @@ function FormulaireBatteryMaterials() {
     setMatCounter(matCounter+1)
     rawMat.push(matCounter)
     setRawMat(rawMat)
+  }
+  const addInputComps = (event) =>{
+    setCompsCounter(compsCounter+1)
+    batteryComps.push(compsCounter)
+    setBatteryComps(batteryComps)
+    console.log(batteryComps)
   }
 
   const [tooltip, setTooltip] = useState({ 
@@ -178,24 +191,22 @@ function FormulaireBatteryMaterials() {
              <label
                  htmlFor="batteryPassportIdentification"
                  className="text-sm text-gray-700 w-64 cursor-pointer"
-                 onMouseEnter={() => handleMouseEnter('Nameofhazardoussubstances')}
-                 onMouseLeave={() => handleMouseLeave('Nameofhazardoussubstances')}
   >
-                Batterie component
+                Battery Composition
               {/* {tooltip.Nameofhazardoussubstances && (
               <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
-              "Hazardous substances" (No 20.a-e): Name (agreed substance nomenclature, e.g. IUPAC or chemical name) all hazardous substance (as “any substance that poses a threat to human health and the environment”). Suggested above 0.1 % weight by weight 
-              </span>
+               Raw materials being economically important and vulnerable to supply disruption. List of the Commission is subject to updating, at least every three years to reflect production, market and technological developments. The latest list will be made available via the Raw Materials Information System (RMIS) of the EU Science Hub. In the battery passport, all critical raw materials above a concentration of 0.1 % weight by weight within each (sub)-component of the battery should be specified in an aggregated way for the entire battery.
+               </span>
                )} */}
                 </label>
                 <div className='flex flex-col'>
-                {hazSub.map((item,key)=>
+                {batteryComps.map((item,key)=>
                 <div key={key}>
                   <input
                 type="text"
                 
-                value={nameOfHazardousSubstances}
-                onChange={handleNameOfHazardousSubstancesChange}
+                value={batterieComponent}
+                onChange={handleBatterieComponentChange}
                 className="input input-bordered input-primary mb-2"
                 required
               />
@@ -203,15 +214,13 @@ function FormulaireBatteryMaterials() {
               
                 )}
                 
-                <button type='button' className="btn btn-primary w-fit m-2 flex mx-auto" onClick={addInputHazSub}><FontAwesomeIcon icon={faPlus} /></button>
+                <button type='button' className="btn btn-primary w-fit m-2 flex mx-auto" onClick={addInputComps}><FontAwesomeIcon icon={faPlus} /></button>
                 </div>
               </div>
             <div className="flex space-x-4 relative">
              <label
                  htmlFor="batteryPassportIdentification"
                  className="text-sm text-gray-700 w-64 cursor-pointer"
-                 onMouseEnter={() => handleMouseEnter('Nameofhazardoussubstances')}
-                 onMouseLeave={() => handleMouseLeave('Nameofhazardoussubstances')}
   >
                 Battery raw Material
               {tooltip.Nameofhazardoussubstances && (
@@ -238,66 +247,57 @@ function FormulaireBatteryMaterials() {
                 <button type='button' className="btn btn-primary w-fit m-2 flex mx-auto" onClick={addInputRawMat}><FontAwesomeIcon icon={faPlus} /></button>
                 </div>
               </div>
-            <div className="flex items-center space-x-4 relative">
-             <label
-                 htmlFor="batteryPassportIdentification"
-                 className="text-sm text-gray-700 w-64 cursor-pointer"
-                 onMouseEnter={() => handleMouseEnter('Relatedidentifiers')}
-                 onMouseLeave={() => handleMouseLeave('Relatedidentifiers')}
-  >Related identifiers of the cathode, anode, electrolyte materials
-              {tooltip.Relatedidentifiers && (
-              <span className="absolute top-0 -left-56 w-48 mt-2 p-2 bg-gray-200 text-black text-sm rounded-md shadow-lg">
-               "Component materials used" (No. 17.a-c): CAS numbers of the materials (as a composition of substances) in cathode, anode, electrolyte.
-              </span>
-               )}
-                </label>
-              <input
-                type="text"
-                id="relatedIdentifiersOfTheCathodeAnodeElectrolyteMaterials"
-                value={relatedIdentifiersOfTheCathodeAnodeElectrolyteMaterials}
-                onChange={handleRelatedIdentifiersOfTheCathodeAnodeElectrolyteMaterialsChange}
-                className="input input-bordered input-primary w-full max-w-xs"
-                required
-              />
-            </div>
-            <div className="flex items-center space-x-4">
-              <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of the cathode, anode, electrolyte materials</label>
-              <div className='flex gap-5 justify-center w-[45%]'>
+            <div className='flex flex-col border-2 p-2 rounded-lg'>
+            <div className="flex flex-col items-center space-x-4">
+            <div className='flex gap-5 justify-center pb-2'>
                 <button className='btn' type="button" id='cathode' onClick={handleShowDescription}>Cathode</button>
                 <button className='btn' type="button" id='anode' onClick={handleShowDescription}>Anode</button>
                 <button className='btn' type="button" id='electrolyte' onClick={handleShowDescription}>Electrolyte</button>
               </div>
+              
             </div>
             {showDescription=="cathode"&&
-             <div className="flex items-center space-x-4">
-             <label className="text-sm text-gray-700 w-64">Description of {showDescription}</label>
+             <div className='flex flex-col justify-center'>
+             <div className="flex items-center space-x-4 pb-4">
+             <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
              <textarea
-               type="text"
-               id={`${showDescription}Description`}
-               value={cathodeDescription}
-               onChange={handleCathodeDescription}
-               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
-               required
-             />
-           </div>
-            }
-            {showDescription=="anode"&&
-             <div className="flex items-center space-x-4">
-             <label className="text-sm text-gray-700 w-64">Description of {showDescription}</label>
+              type="text"
+              id={`${showDescription}Description`}
+              value={relatedIdCathode}
+              onChange={handleCathodeId}
+              className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+              required
+            />
+          </div>
+          <div className="flex items-center space-x-4">
+          <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of {showDescription}</label>
              <textarea
-               type="text"
-               id={`${showDescription}Description`}
-               value={anodeDescription}
-               onChange={handleAnodeDescription}
-               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
-               required
-             />
+              type="text"
+              id={`${showDescription}Description`}
+              value={cathodeDescription}
+              onChange={handleCathodeDescription}
+              className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+              required
+            />
+          </div>
            </div>
             }
             {showDescription=="electrolyte"&&
-             <div className="flex items-center space-x-4">
-             <label className="text-sm text-gray-700 w-64">Description of {showDescription}</label>
-             <textarea
+            <div className='flex flex-col justify-center'>
+              <div className="flex items-center space-x-4 pb-4">
+              <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
+              <textarea
+               type="text"
+               id={`${showDescription}Description`}
+               value={relatedIdElectrolyte}
+               onChange={handleElectrolyteId}
+               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+               required
+             />
+           </div>
+           <div className="flex items-center space-x-4">
+           <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of {showDescription}</label>
+              <textarea
                type="text"
                id={`${showDescription}Description`}
                value={electrolyteDescription}
@@ -306,7 +306,38 @@ function FormulaireBatteryMaterials() {
                required
              />
            </div>
+            </div>
+             
             }
+            {showDescription=="anode"&&
+            <div className='flex flex-col justify-center'>
+              <div className="flex items-center space-x-4 pb-4">
+              <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
+              <textarea
+               type="text"
+               id={`${showDescription}Description`}
+               value={relatedIdAnode}
+               onChange={handleAnodeId}
+               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+               required
+             />
+           </div>
+           <div className="flex items-center space-x-4">
+           <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of {showDescription}</label>
+              <textarea
+               type="text"
+               id={`${showDescription}Description`}
+               value={anodeDescription}
+               onChange={handleAnodeDescription}
+               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+               required
+             />
+           </div>
+            </div>
+             
+            }
+            </div>
+            
            
            <div className="flex space-x-4 relative">
              <label
