@@ -260,7 +260,7 @@ function FormulaireBatteryMaterials() {
              <div className='flex flex-col justify-center'>
              <div className="flex items-center space-x-4 pb-4">
              <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
-             <textarea
+             <input
               type="text"
               id={`${showDescription}Description`}
               value={relatedIdCathode}
@@ -286,12 +286,12 @@ function FormulaireBatteryMaterials() {
             <div className='flex flex-col justify-center'>
               <div className="flex items-center space-x-4 pb-4">
               <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
-              <textarea
+              <input
                type="text"
                id={`${showDescription}Description`}
                value={relatedIdElectrolyte}
                onChange={handleElectrolyteId}
-               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+               className="input input-bordered input-primary w-full max-w-xs p-2 resize-none"
                required
              />
            </div>
@@ -302,7 +302,7 @@ function FormulaireBatteryMaterials() {
                id={`${showDescription}Description`}
                value={electrolyteDescription}
                onChange={handleElectrolyteDescription}
-               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+               className="input input-bordered input-primary w-full max-w-xs p-2 resize-none"
                required
              />
            </div>
@@ -313,12 +313,12 @@ function FormulaireBatteryMaterials() {
             <div className='flex flex-col justify-center'>
               <div className="flex items-center space-x-4 pb-4">
               <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
-              <textarea
+              <input
                type="text"
                id={`${showDescription}Description`}
                value={relatedIdAnode}
                onChange={handleAnodeId}
-               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+               className="input input-bordered input-primary w-full max-w-xs p-2 resize-none"
                required
              />
            </div>
