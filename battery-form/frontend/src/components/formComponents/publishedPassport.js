@@ -9,8 +9,10 @@ const PublishedPassport = () => {
   const [nbrGenerated, setNbrGenerated] = useState(0)
   const [src, setSrc] = useState([])
   const [count,setCount] = useState(1)
+  const [pages,setPages] = useState(0)
   const generate = async () => {
     const qrCodes = []
+    setPages(count)
     for (let i = 0; i < Number(nbrGenerated); i++) {
       const imgURL = `https://acme.dpp.Citet.com/${i}`
       const output = await QRCode.toDataURL(imgURL)
@@ -42,11 +44,11 @@ const PublishedPassport = () => {
           </button>
         </form>
         <div>
-        {nbrGenerated!=0?(
+        {pages!=0?(
           <div>
-            <h2>Battery ID: </h2><p>BID00{count}</p>
-            <h2>Battery Passport ID: </h2><p>BPID 00{count}</p>
-            <img src={src[count-1]} className='flex mx-auto p-2 w-[50%]' />
+            <h2>Battery ID: </h2><p>BID00{pages}</p>
+            <h2>Battery Passport ID: </h2><p>BPID 00{pages}</p>
+            <img src={src[pages-1]} className='flex mx-auto p-2 w-[50%]' />
         </div>
         ):(<div>No battery generated.</div>)}
 
@@ -56,9 +58,9 @@ const PublishedPassport = () => {
             <a href='/dashboard'>Return to dashboard</a>
           </button>
           <div className="join">
-            <button className="join-item btn" onClick={()=>{if(count>1) setCount(count-1)}}>«</button>
-            <button className="join-item btn">Page {count}</button>
-            <button className="join-item btn" onClick={()=>{if(count<nbrGenerated) setCount(count+1)}}>»</button>
+            <button className="join-item btn" onClick={()=>{if(pages>1) setPages(pages-1)}}>«</button>
+            <button className="join-item btn">Page {pages}</button>
+            <button className="join-item btn" onClick={()=>{if(pages<nbrGenerated) setPages(pages+1)}}>»</button>
           </div>
         </div>
       </div>

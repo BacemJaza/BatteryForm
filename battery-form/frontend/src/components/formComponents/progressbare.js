@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ProgressBar = ({ progress }) => {
-  console.log(progress)
   const steps = [
     { text: 'General Information'},
     { text: 'Supply Chain Due Diligence'},

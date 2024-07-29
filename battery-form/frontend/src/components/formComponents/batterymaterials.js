@@ -8,10 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function FormulaireBatteryMaterials() {
   const [batteryPassportIdentification, setBatteryPassportIdentification] = useState('');
-  const [batterieComponent, setBatterieComponent] = useState('');
-  const [batteryRawMaterial, setBatteryRawMaterial] = useState('');
+  const [batterieComponent, setBatterieComponent] = useState([]);
+  const [batteryRawMaterial, setBatteryRawMaterial] = useState([]);
   const [compositionOfTheCathodeAnodeElectrolyteMaterials, setCompositionOfTheCathodeAnodeElectrolyteMaterials] = useState('');
-  const [nameOfHazardousSubstances, setNameOfHazardousSubstances] = useState('');
+  const [nameOfHazardousSubstances, setNameOfHazardousSubstances] = useState([]);
   const [hazardClasses, setHazardClasses] = useState('');
   const [relatedIdentifiersOfHazardousSubstances, setRelatedIdentifiersOfHazardousSubstances] = useState('');
   const [locationOfHazardousSubstances, setLocationOfHazardousSubstances] = useState('');
@@ -39,11 +39,12 @@ function FormulaireBatteryMaterials() {
   };
 
   const handleBatterieComponentChange = (event) => {
-    setBatterieComponent(event.target.value)
+    // batterieComponent[key] = event.target.value
+    console.log(event)
+    setBatterieComponent(batterieComponent)
   };
 
   const handleBatteryRawMaterialChange = (event) => {
-    console.log(event)
     setBatteryRawMaterial(event.target.value);
   };
 
@@ -128,7 +129,6 @@ function FormulaireBatteryMaterials() {
     setHazCounter(hazCounter+1)
     hazSub.push(hazCounter)
     setHazSub(hazSub)
-    console.log(hazSub)
   }
 
   const addInputRawMat = () =>{
@@ -140,7 +140,6 @@ function FormulaireBatteryMaterials() {
     setCompsCounter(compsCounter+1)
     batteryComps.push(compsCounter)
     setBatteryComps(batteryComps)
-    console.log(batteryComps)
   }
 
   const [tooltip, setTooltip] = useState({ 
@@ -204,9 +203,8 @@ function FormulaireBatteryMaterials() {
                 <div key={key}>
                   <input
                 type="text"
-                
-                value={batterieComponent}
-                onChange={handleBatterieComponentChange}
+                value={batterieComponent[key]}
+                onChange={(e)=>{batterieComponent[key] = e.target.value; setBatterieComponent(batterieComponent);console.log(batterieComponent)}}
                 className="input input-bordered input-primary mb-2"
                 required
               />
@@ -234,9 +232,8 @@ function FormulaireBatteryMaterials() {
                 <div key={key}>
                   <input
                 type="text"
-                
-                value={batteryRawMaterial}
-                onChange={handleBatteryRawMaterialChange}
+                value={batteryRawMaterial[key]}
+                onChange={(e)=>{batteryRawMaterial[key] = e.target.value; setBatteryRawMaterial(batteryRawMaterial)}}
                 className="input input-bordered input-primary mb-2"
                 required
               />
@@ -358,9 +355,8 @@ function FormulaireBatteryMaterials() {
                 <div key={key}>
                   <input
                 type="text"
-                
-                value={nameOfHazardousSubstances}
-                onChange={handleNameOfHazardousSubstancesChange}
+                value={nameOfHazardousSubstances[key]}
+                onChange={(e)=>{nameOfHazardousSubstances[key] = e.target.value; setNameOfHazardousSubstances(nameOfHazardousSubstances)}}
                 className="input input-bordered input-primary mb-2"
                 required
               />
