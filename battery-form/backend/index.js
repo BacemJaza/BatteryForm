@@ -6,7 +6,7 @@ import { PORT, mongoDBURL } from './config.js';
 import generalInformationRoutes from './routes/general informationroute.js';
 import performanceDurabilityRoutes from './routes/performence and durabilityroute.js';
 import designofcircularityroutes from './routes/design of circularityroute.js';
-import supplyChainRoute from './routes/Supplychainduediligenceroute.js';
+import supplyChainRoute from './routes/Supply chain due diligenceroute.js';
 import BatteryMaterialRoute from './routes/Battery materials and compositionroute.js';
 
 

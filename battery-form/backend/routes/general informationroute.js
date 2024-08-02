@@ -1,11 +1,12 @@
-// performanceDurabilityRoutes.js
+// routes/performanceanddurability.js
 
-const express = require('express');
+import express from 'express';
+import PerformanceDurability from '../models/performanceanddurability.js';
+
 const router = express.Router();
-const PerformanceDurability = require('../models/performanceDurabilityModel');
 
 // Route POST pour soumettre le formulaire PerformanceDurability
-router.post('/', async (req, res) => {
+router.post('/performance-and-durability', async (req, res) => {
   try {
     const performanceDurability = new PerformanceDurability(req.body);
     const savedPerformanceDurability = await performanceDurability.save();
@@ -15,4 +16,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

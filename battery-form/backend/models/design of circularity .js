@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+import mongoose from 'mongoose';
+
+const { Schema, model } = mongoose;
 
 // Sous-formulaire : formulaireDesignCircularity
 const DesignCircularitySchema = new Schema({
@@ -42,4 +43,8 @@ endOfLifeInformation:{
 // Modèle de données pour Design of Circularity
 const DesignOfCircularityModel = mongoose.model('DesignOfCircularity', DesignCircularitySchema);
 
-module.exports = DesignOfCircularityModel;
+export default DesignOfCircularityModel;
+
+
+
+

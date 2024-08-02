@@ -1,5 +1,5 @@
 import express from 'express';
-import DesignCircularity from '../models/designofcircularity.js';
+import DesignCircularity from '../models/design of circularity .js';
 
 
 const router = express.Router();
