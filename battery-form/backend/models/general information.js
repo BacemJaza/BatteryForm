@@ -1,6 +1,10 @@
-const mongoose = require('mongoose');
+// models/general information.js
 
-const GeneralInformationSchema = new mongoose.Schema({
+import mongoose from 'mongoose';
+
+const { Schema, model } = mongoose;
+
+const GeneralInformationSchema = new Schema({
   batteryPassportIdentification: {
     type: String,
     required: true
@@ -36,7 +40,7 @@ const GeneralInformationSchema = new mongoose.Schema({
     required: true
   },
   euDeclarationFile: {
-    type: String, // Vous pouvez utiliser String pour stocker le chemin du fichier dans la base de données
+    type: String,
     required: true
   },
   idEuDeclaration: {
@@ -44,15 +48,15 @@ const GeneralInformationSchema = new mongoose.Schema({
     required: true
   },
   testReportsFile: {
-    type: String, // String pour le chemin du fichier
+    type: String,
     required: true
   },
   separateCollectionSymbol: {
-    type: String, // String pour le chemin du fichier
+    type: String,
     required: true
   },
   cadmiumLeadSymbol: {
-    type: String, // String pour le chemin du fichier
+    type: String,
     required: true
   },
   carbonFootprintClass: {
@@ -66,6 +70,9 @@ const GeneralInformationSchema = new mongoose.Schema({
   }
 });
 
-const GeneralInformation = mongoose.model('GeneralInformation', GeneralInformationSchema);
+const GeneralInformation = model('GeneralInformation', GeneralInformationSchema);
 
-module.exports = GeneralInformation;
+
+export default GeneralInformation; // Export par défaut du modèle Mongoose
+
+

@@ -1,16 +1,21 @@
-const express = require('express');
-const router = express.Router();
-const SupplyChainForm = require('../models/SupplyChainForm');
+// routes/supplychain.js
 
-// Route pour créer un nouveau formulaire de chaîne d'approvisionnement
-router.post('/', async (req, res) => {
-  const supplyChainForm = new SupplyChainForm(req.body);
+import express from 'express';
+import SupplyChain from '../models/Supply chain due diligence.js';
+
+
+
+const router = express.Router();
+
+// Route POST pour soumettre le formulaire de supply chain
+router.post('/supply-chain', async (req, res) => {
   try {
-    const newSupplyChainForm = await supplyChainForm.save();
-    res.status(201).json(newSupplyChainForm);
+    const supplyChain = new SupplyChain(req.body);
+    const savedSupplyChain = await supplyChain.save();
+    res.status(201).json(savedSupplyChain);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-module.exports = router;
+export default router;

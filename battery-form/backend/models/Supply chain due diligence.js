@@ -1,12 +1,10 @@
-// SupplyChainForm.js
+import mongoose from 'mongoose';
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema, model } = mongoose;
 
-// Définir le schéma du formulaire
-const supplyChainFormSchema = new Schema({
+const SupplyChainInformationSchema = new Schema({
   dueDiligenceReport: {
-    type: String,  // Vous pouvez changer le type selon vos besoins, par exemple un champ pour le chemin du fichier
+    type: String,
     required: true
   },
   supplyChainAssurances: {
@@ -23,7 +21,7 @@ const supplyChainFormSchema = new Schema({
   }
 });
 
-// Créer un modèle à partir du schéma
-const SupplyChainForm = mongoose.model('SupplyChainForm', supplyChainFormSchema);
+const SupplyChainInformation = model('SupplyChainInformation', SupplyChainInformationSchema);
 
-module.exports = SupplyChainForm;
+export default SupplyChainInformation;
+

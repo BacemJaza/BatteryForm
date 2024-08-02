@@ -1,16 +1,19 @@
-const express = require('express');
-const router = express.Router();
-const DesignOfCircularityModel = require('../models/DesignOfCircularityModel');
+import express from 'express';
+import DesignCircularity from '../models/designofcircularity.js';
 
-// Route pour créer un nouveau formulaire de design de circularité
-router.post('/design-of-circularity', async (req, res) => {
-  const formData = req.body; // Données envoyées depuis le front-end
-  try {
-    const newDesignOfCircularity = await DesignOfCircularityModel.create(formData);
-    res.status(201).json(newDesignOfCircularity);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+
+const router = express.Router();
+
+// Route POST pour créer une nouvelle entrée DesignCircularity
+router.post('/design-circularity', async (req, res) => {
+    try {
+        const newDesignCircularity = new DesignCircularity(req.body);
+        const savedDesignCircularity = await newDesignCircularity.save();
+        res.status(201).json(savedDesignCircularity);
+    } catch (err) {
+        console.error('Erreur lors du traitement de la requête :', err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
 });
 
-module.exports = router;
+export default router;
