@@ -262,7 +262,7 @@ function FormulaireBatteryMaterials() {
               id={`${showDescription}Description`}
               value={relatedIdCathode}
               onChange={handleCathodeId}
-              className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+              className="input input-bordered input-primary w-full max-w-xs p-2 resize-none"
               required
             />
           </div>
@@ -281,56 +281,56 @@ function FormulaireBatteryMaterials() {
             }
             {showDescription=="electrolyte"&&
             <div className='flex flex-col justify-center'>
-              <div className="flex items-center space-x-4 pb-4">
-              <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
-              <input
-               type="text"
-               id={`${showDescription}Description`}
-               value={relatedIdElectrolyte}
-               onChange={handleElectrolyteId}
-               className="input input-bordered input-primary w-full max-w-xs p-2 resize-none"
-               required
-             />
-           </div>
-           <div className="flex items-center space-x-4">
-           <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of {showDescription}</label>
-              <textarea
-               type="text"
-               id={`${showDescription}Description`}
-               value={electrolyteDescription}
-               onChange={handleElectrolyteDescription}
-               className="input input-bordered input-primary w-full max-w-xs p-2 resize-none"
-               required
-             />
-           </div>
-            </div>
+            <div className="flex items-center space-x-4 pb-4">
+            <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
+            <input
+             type="text"
+             id={`${showDescription}Description`}
+             value={relatedIdCathode}
+             onChange={handleCathodeId}
+             className="input input-bordered input-primary w-full max-w-xs p-2 resize-none"
+             required
+           />
+         </div>
+         <div className="flex items-center space-x-4">
+         <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of {showDescription}</label>
+            <textarea
+             type="text"
+             id={`${showDescription}Description`}
+             value={electrolyteDescription}
+             onChange={handleElectrolyteDescription}
+             className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+             required
+           />
+         </div>
+          </div>
              
             }
             {showDescription=="anode"&&
             <div className='flex flex-col justify-center'>
-              <div className="flex items-center space-x-4 pb-4">
-              <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
-              <input
-               type="text"
-               id={`${showDescription}Description`}
-               value={relatedIdAnode}
-               onChange={handleAnodeId}
-               className="input input-bordered input-primary w-full max-w-xs p-2 resize-none"
-               required
-             />
-           </div>
-           <div className="flex items-center space-x-4">
-           <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of {showDescription}</label>
-              <textarea
-               type="text"
-               id={`${showDescription}Description`}
-               value={anodeDescription}
-               onChange={handleAnodeDescription}
-               className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
-               required
-             />
-           </div>
-            </div>
+            <div className="flex items-center space-x-4 pb-4">
+            <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Related IDs of {showDescription}</label>
+            <input
+             type="text"
+             id={`${showDescription}Description`}
+             value={relatedIdAnode}
+             onChange={handleAnodeId}
+             className="input input-bordered input-primary w-full max-w-xs p-2 resize-none"
+             required
+           />
+         </div>
+         <div className="flex items-center space-x-4">
+         <label htmlFor="compositionOfTheCathodeAnodeElectrolyteMaterials" className="text-sm text-gray-700 w-64">Composition of {showDescription}</label>
+            <textarea
+             type="text"
+             id={`${showDescription}Description`}
+             value={anodeDescription}
+             onChange={handleAnodeDescription}
+             className="input input-bordered input-primary w-full max-w-xs h-[200px] p-2 resize-none"
+             required
+           />
+         </div>
+          </div>
              
             }
             </div>
@@ -496,10 +496,10 @@ function FormulaireBatteryMaterials() {
               </div>
             </div>
 
-          {/* <div className="flex justify-center mt-6">
-            <button type="submit" className="btn btn-primary px-8 py-3 mr-2">Submit</button>
+          <div className="flex justify-center mt-6">
+            {/* <button type="submit" className="btn btn-primary px-8 py-3 mr-2">Submit</button> */}
             <button type="button" className="btn btn-secondary px-8 py-3">Cancel</button>
-          </div> */}
+          </div>
         </form>
       </div>
       {/* Boutons Next et Previous à la fin de la page */}
