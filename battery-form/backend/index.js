@@ -8,12 +8,20 @@ import performanceDurabilityRoutes from './routes/performence and durabilityrout
 import designofcircularityroutes from './routes/design of circularityroute.js';
 import supplyChainRoute from './routes/Supply chain due diligenceroute.js';
 import BatteryMaterialRoute from './routes/Battery materials and compositionroute.js';
-
+import authRoutes from './routes/authRoutes.js'
+import log from './middleware/logger.js';
+import errHandler from './middleware/errHandler.js';
+import cookieParser from 'cookie-parser';
+import cors from 'cors'
+import corsOptions from './config/corsOptions.js';
 
 const app = express();
 
+app.use(log.logger)
 // Middleware pour parser le JSON dans les requêtes POST
 app.use(express.json());
+app.use(cors(corsOptions))
+app.use(cookieParser())
 
 app.get('/', (request, response) => {
     console.log(request);
@@ -33,6 +41,8 @@ mongoose.connect(mongoDBURL)
     });
 
 // Montage des routes
+app.use(errHandler)
+app.use('/auth',authRoutes)
 app.use('/api', generalInformationRoutes);
 app.use('/api', performanceDurabilityRoutes);
 app.use('/api',designofcircularityroutes);
