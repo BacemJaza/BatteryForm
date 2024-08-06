@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors'; // Importation du middleware CORS
 import { PORT, mongoDBURL } from './config.js';
 
 // Importation des routes
@@ -9,11 +10,17 @@ import designofcircularityroutes from './routes/design of circularityroute.js';
 import supplyChainRoute from './routes/Supply chain due diligenceroute.js';
 import BatteryMaterialRoute from './routes/Battery materials and compositionroute.js';
 
-
 const app = express();
 
 // Middleware pour parser le JSON dans les requêtes POST
 app.use(express.json());
+
+// Configurer CORS
+app.use(cors({
+  origin: 'http://localhost:3000', // Remplace cette URL par l'origine de ton frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Ajuste les méthodes HTTP selon tes besoins
+  allowedHeaders: ['Content-Type', 'Authorization'] // Ajuste les en-têtes autorisés selon tes besoins
+}));
 
 app.get('/', (request, response) => {
     console.log(request);
@@ -35,7 +42,8 @@ mongoose.connect(mongoDBURL)
 // Montage des routes
 app.use('/api', generalInformationRoutes);
 app.use('/api', performanceDurabilityRoutes);
-app.use('/api',designofcircularityroutes);
-app.use('/api',supplyChainRoute);
-app.use('/api',BatteryMaterialRoute)
+app.use('/api', designofcircularityroutes);
+app.use('/api', supplyChainRoute);
+app.use('/api', BatteryMaterialRoute);
+
 export default app;

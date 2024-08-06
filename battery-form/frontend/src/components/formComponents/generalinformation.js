@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Headline from '../../layouts/form/headline';
 import Footerform from '../../layouts/form/footerform';
 import ProgressBar from './progressbare';
+import axios from 'axios';
+
+
 
 function FormulaireGeneralinformation() {
   const [batteryPassportIdentification, setBatteryPassportIdentification] = useState('');
@@ -83,51 +86,48 @@ function FormulaireGeneralinformation() {
     setCo2Footprint(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Vous pouvez traiter les données du formulaire ici, par exemple, les envoyer à un backend
-    console.log('Submitted:', {
-      batteryPassportIdentification,
-      batteryIdentification,
-      batteryCategory,
-      batteryStatus,
-      manufacturerId,
-      manufacturingDate,
-      manufacturingPlace,
-      batteryWeight,
-      euDeclarationFile,
-      idEuDeclaration,
-      testReportsFile,
-      separateCollectionSymbol,
-      cadmiumLeadSymbol,
-      carbonFootprintClass,
-      co2Footprint,
-    });
-    // Réinitialisez les champs après la soumission si nécessaire
-    // setBatteryPassportIdentification('');
-    // setBatteryIdentification('');
-    // setBatteryCategory('');
-    // setBatteryStatus('');
-    // setManufacturerId('');
-    // setManufacturingDate('');
-    // setManufacturingPlace('');
-    // setBatteryWeight('');
-    // setEuDeclarationFile(null);
-    // setIdEuDeclaration('');
-    // setTestReportsFile(null);
-    // setSeparateCollectionSymbol(null);
-    // setCadmiumLeadSymbol(null);
-    // setCarbonFootprintClass('');
-    // setCo2Footprint('');
+  const handleSubmit = async (event) => {
+    
+    const formData = new FormData();
+
+    formData.append('batteryPassportIdentification', batteryPassportIdentification);
+    formData.append('batteryIdentification', batteryIdentification);
+    formData.append('batteryCategory', batteryCategory);
+    formData.append('batteryStatus', batteryStatus);
+    formData.append('manufacturerId', manufacturerId);
+    formData.append('manufacturingDate', manufacturingDate);
+    formData.append('manufacturingPlace', manufacturingPlace);
+    formData.append('batteryWeight', batteryWeight);
+    formData.append('euDeclarationFile', euDeclarationFile);
+    formData.append('idEuDeclaration', idEuDeclaration);
+    formData.append('testReportsFile', testReportsFile);
+    formData.append('separateCollectionSymbol', separateCollectionSymbol);
+    formData.append('cadmiumLeadSymbol', cadmiumLeadSymbol);
+    formData.append('carbonFootprintClass', carbonFootprintClass);
+    formData.append('co2Footprint', co2Footprint);
+    try {
+      await axios.post('http://localhost:5555/api/general-information', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      return true; // Indique que la soumission a réussi
+    } catch (error) {
+      console.error('Erreur lors de la soumission du formulaire:', error);
+      return false; // Indique que la soumission a échoué
+    }
   };
 
-  const handleNext = () => {
-    console.log("Next button clicked");
-    // Logique pour le bouton Next
-    // Par exemple, naviguer vers une autre page
-    navigate('/supplychain'); // Remplacez '/performanceanddurability' par votre chemin de route réel
+  const handleNext = async () => {
+    const isSubmitted = await handleSubmit();
+    if (isSubmitted) {
+      navigate('/supplychain'); // Naviguer vers la page suivante après la soumission
+    } else {
+      // Vous pouvez afficher un message d'erreur à l'utilisateur ici
+      alert('Erreur lors de la soumission. Veuillez réessayer.');
+    }
   };
-
+  
   const [tooltip, setTooltip] = useState({ 
     batteryPassport: false, 
     Batteryidentification:false,
@@ -184,7 +184,7 @@ function FormulaireGeneralinformation() {
                value={batteryPassportIdentification}
                onChange={handleBatteryPassportIdentificationChange}
                className="input input-bordered input-primary w-full max-w-xs"
-               required
+              
                   />
                 </div>
 
@@ -208,7 +208,7 @@ function FormulaireGeneralinformation() {
                value={batteryIdentification}
                onChange={handleBatteryIdentificationChange}
                className="input input-bordered input-primary w-full max-w-xs"
-               required
+              
                   />
                 </div>
 
@@ -222,7 +222,7 @@ function FormulaireGeneralinformation() {
                 value={batteryCategory}
                 onChange={handleCategoryChange}
                 className="input input-bordered input-primary w-full max-w-xs"
-                required
+               
               >
                 <option value="">-- Sélectionnez une catégorie --</option>
                 <option value="EV">EV</option>
@@ -251,7 +251,7 @@ function FormulaireGeneralinformation() {
                 value={batteryStatus}
                 onChange={handleStatusChange}
                 className="input input-bordered input-primary w-full max-w-xs"
-                required
+               
               >
                 <option value="">-- Sélectionnez un statut --</option>
                 <option value="original">Original</option>
@@ -282,7 +282,7 @@ function FormulaireGeneralinformation() {
                value={manufacturerId}
                onChange={handleManufacturerIdChange}
                className="input input-bordered input-primary w-full max-w-xs"
-               required
+              
                   />
                 </div>
 
@@ -294,7 +294,7 @@ function FormulaireGeneralinformation() {
                 value={manufacturingDate}
                 onChange={handleManufacturingDateChange}
                 className="input input-bordered input-primary w-full max-w-xs"
-                required
+               
               />
             </div>
 
@@ -306,7 +306,7 @@ function FormulaireGeneralinformation() {
                 value={manufacturingPlace}
                 onChange={handleManufacturingPlaceChange}
                 className="input input-bordered input-primary w-full max-w-xs"
-                required
+                
               />
             </div>
 
@@ -318,7 +318,7 @@ function FormulaireGeneralinformation() {
                 value={batteryWeight}
                 onChange={handleBatteryWeightChange}
                 className="input input-bordered input-primary w-full max-w-xs"
-                required
+                
               />
             </div>
 
@@ -342,7 +342,7 @@ function FormulaireGeneralinformation() {
                 onChange={handleEuDeclarationFileChange}
                 className="input"
                 accept=".pdf,.doc,.docx"
-                required
+                
               />
             </div>
 
@@ -366,7 +366,7 @@ function FormulaireGeneralinformation() {
                 value={idEuDeclaration}
                 onChange={handleIdEuDeclarationChange}
                 className="input input-bordered input-primary w-full max-w-xs"
-                required
+                
               />
             </div>
 
@@ -390,7 +390,7 @@ function FormulaireGeneralinformation() {
                 onChange={handleTestReportsFileChange}
                 className="input"
                 accept=".pdf,.doc,.docx"
-                required
+                
               />
             </div>
 
@@ -414,7 +414,7 @@ function FormulaireGeneralinformation() {
                 onChange={handleSeparateCollectionSymbolChange}
                 className="input"
                 accept=".png,.jpg,.jpeg"
-                required
+                
               />
             </div>
 
@@ -438,7 +438,7 @@ function FormulaireGeneralinformation() {
                 onChange={handleCadmiumLeadSymbolChange}
                 className="input"
                 accept=".png,.jpg,.jpeg"
-                required
+               
               />
             </div>
 
@@ -494,7 +494,7 @@ function FormulaireGeneralinformation() {
                 value={co2Footprint}
                 onChange={handleCo2FootprintChange}
                 className="input input-bordered input-primary w-full max-w-xs"
-                required
+                
               />
             </div>
           </div>
