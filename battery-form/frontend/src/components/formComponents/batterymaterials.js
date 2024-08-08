@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Headline from '../../layouts/form/headline';
 import Footerform from '../../layouts/form/footerform';
 import ProgressBar from './progressbare';
@@ -21,16 +22,15 @@ function FormulaireBatteryMaterials() {
   const [anodeDescription, setAnodeDescription] = useState("")
   const [electrolyteDescription, setElectrolyteDescription] = useState("")
   const [showDescription, setShowDescription] = useState("cathode")
-  const [hazCounter,setHazCounter] = useState(0)
-  const [matCounter,setMatCounter] = useState(0)
-  const [compsCounter,setCompsCounter] = useState(0)
-  const [hazSub,setHazSub] = useState([])
-  const [rawMat,setRawMat] = useState([])
-  const [batteryComps,setBatteryComps] = useState([])
-  const [relatedIdCathode,setRelatedIdCathode] = useState("")
-  const [relatedIdAnode,setRelatedIdAnode] = useState("")
-  const [relatedIdElectrolyte,setRelatedIdElectrolyte] = useState("")
-
+  const [hazCounter, setHazCounter] = useState(0)
+  const [matCounter, setMatCounter] = useState(0)
+  const [compsCounter, setCompsCounter] = useState(0)
+  const [hazSub, setHazSub] = useState([])
+  const [rawMat, setRawMat] = useState([])
+  const [batteryComps, setBatteryComps] = useState([])
+  const [relatedIdCathode, setRelatedIdCathode] = useState("")
+  const [relatedIdAnode, setRelatedIdAnode] = useState("")
+  const [relatedIdElectrolyte, setRelatedIdElectrolyte] = useState("")
 
   const navigate = useNavigate();
 
@@ -48,10 +48,10 @@ function FormulaireBatteryMaterials() {
     setBatteryRawMaterial(event.target.value);
   };
 
-
   const handleNameOfHazardousSubstancesChange = (event) => {
     setNameOfHazardousSubstances(event.target.value);
   };
+
   const handleRawMatChange = (event) => {
     setRawMat(event.target.value);
   };
@@ -75,54 +75,81 @@ function FormulaireBatteryMaterials() {
   const handleImpactOfSubstancesOnTheEnvironmentHumanHealthSafetyChange = (event) => {
     setImpactOfSubstancesOnTheEnvironmentHumanHealthSafety(event.target.value);
   };
-  const handleShowDescription = (event)=>{
-    // console.log(event.target.id)
+
+  const handleShowDescription = (event) => {
     setShowDescription(event.target.id)
   }
-  const handleCathodeDescription = (event)=>{
+
+  const handleCathodeDescription = (event) => {
     setCathodeDescription(event.target.value)
   }
-  const handleAnodeDescription = (event)=>{
+
+  const handleAnodeDescription = (event) => {
     setAnodeDescription(event.target.value)
   }
-  const handleElectrolyteDescription = (event)=>{
+
+  const handleElectrolyteDescription = (event) => {
     setElectrolyteDescription(event.target.value)
   }
-  const handleCathodeId = (event)=>{
+
+  const handleCathodeId = (event) => {
     setRelatedIdCathode(event.target.value)
   }
-  const handleAnodeId = (event)=>{
+
+  const handleAnodeId = (event) => {
     setRelatedIdAnode(event.target.value)
   }
-  const handleElectrolyteId = (event)=>{
+
+  const handleElectrolyteId = (event) => {
     setRelatedIdElectrolyte(event.target.value)
   }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Submitted:', {
-      batteryPassportIdentification,
-      batterieComponent,
-      batteryRawMaterial,
-      compositionOfTheCathodeAnodeElectrolyteMaterials,
-      nameOfHazardousSubstances,
-      hazardClasses,
-      relatedIdentifiersOfHazardousSubstances,
-      locationOfHazardousSubstances,
-      concentrationRangeOfHazardousSubstances,
-      impactOfSubstancesOnTheEnvironmentHumanHealthSafety,
-    });
-    navigate('/supplychain');
+
+  const handleSubmit = async (event) => {
+    
+    const formData = new FormData();
+    formData.append('batteryPassportIdentification', batteryPassportIdentification);
+    formData.append('batterieComponent', JSON.stringify(batterieComponent));
+    formData.append('batteryRawMaterial', JSON.stringify(batteryRawMaterial));
+    formData.append('compositionOfTheCathodeAnodeElectrolyteMaterials', compositionOfTheCathodeAnodeElectrolyteMaterials);
+    formData.append('nameOfHazardousSubstances', JSON.stringify(nameOfHazardousSubstances));
+    formData.append('hazardClasses', hazardClasses);
+    formData.append('relatedIdentifiersOfHazardousSubstances', relatedIdentifiersOfHazardousSubstances);
+    formData.append('locationOfHazardousSubstances', locationOfHazardousSubstances);
+    formData.append('concentrationRangeOfHazardousSubstances', concentrationRangeOfHazardousSubstances);
+    formData.append('impactOfSubstancesOnTheEnvironmentHumanHealthSafety', impactOfSubstancesOnTheEnvironmentHumanHealthSafety);
+    formData.append('cathodeDescription', cathodeDescription);
+    formData.append('anodeDescription', anodeDescription);
+    formData.append('electrolyteDescription', electrolyteDescription);
+    formData.append('relatedIdCathode', relatedIdCathode);
+    formData.append('relatedIdAnode', relatedIdAnode);
+    formData.append('relatedIdElectrolyte', relatedIdElectrolyte);
+
+    try {
+      // Make a POST request using axios
+      await axios.post('http://localhost:5555/api/battery-materials', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return true; // Indique que la soumission a réussi
+    } catch (error) {
+      console.error('Erreur lors de la soumission du formulaire:', error);
+      return false; // Indique que la soumission a échoué
+    }
   };
 
-  const handleNext = () => {
-    console.log("Next button clicked");
-    navigate('/performanceanddurability');
+  const handleNext = async () => {
+    const isSubmitted = await handleSubmit();
+    if (isSubmitted) {
+      navigate('/performanceanddurability'); // Naviguer vers la page suivante après la soumission
+    } else {
+      // Vous pouvez afficher un message d'erreur à l'utilisateur ici
+      alert('Erreur lors de la soumission. Veuillez réessayer.');
+    }
   };
-
+  
   const handlePrevious = () => {
-    // Logique pour le bouton Previous
     console.log("Previous button clicked");
-    // Par exemple, naviguer vers une autre page
     navigate('/designofcircularity'); // Remplacez '/generalInformation' par votre chemin de route réel
   };
   const addInputHazSub = () =>{

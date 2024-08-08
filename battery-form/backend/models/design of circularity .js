@@ -2,49 +2,104 @@ import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
-// Sous-formulaire : formulaireDesignCircularity
+// Définir le schéma pour le formulaire Design of Circularity
 const DesignCircularitySchema = new Schema({
-    DesignofCircularity:{
-  postalAddress: String,
-  emailAddress: String,
-  webAddress: String,
-  partNumbers: String,
-  manualRemovalBattery: String,
-  manualDisassemblyBatteryPack: String,
-},
+    DesignofCircularity: {
+        postalAddress: {
+            type: String,
+            required: false // Champ non requis
+        },
+        emailAddress: {
+            type: String,
+            required: false // Champ non requis
+        },
+        webAddress: {
+            type: String,
+            required: false // Champ non requis
+        },
+        partNumbers: {
+            type: String,
+            required: false // Champ non requis
+        },
+        manualRemovalBattery: {
+            type: String, // Stocke le chemin du fichier pour la batterie
+            required: false // Champ non requis
+        },
+        manualDisassemblyBatteryPack: {
+            type: String, // Stocke le chemin du fichier pour le pack de batterie
+            required: false // Champ non requis
+        },
+    },
 
-// Sous-formulaire : batterySafetyRequirements
-batterySafetyRequirements:{
-  extinguishingAgent: String,
-  safetyMeasures: String,
-},
+    batterySafetyRequirements: {
+        extinguishingAgent: {
+            type: String,
+            required: false // Champ non requis
+        },
+        safetyMeasures: {
+            type: String, // Stocke le chemin du fichier pour les mesures de sécurité
+            required: false // Champ non requis
+        },
+    },
 
-// Sous-formulaire : recycledAndRenewableContent
-recycledAndRenewableContent:{
-  preConsumerRecycledNickel: String,
-  preConsumerRecycledCobalt: String,
-  preConsumerRecycledLithium: String,
-  preConsumerRecycledLead: String,
-  postConsumerRecycledNickel: String,
-  postConsumerRecycledCobalt: String,
-  postConsumerRecycledLithium: String,
-  postConsumerRecycledLead: String,
-  renewableContentShare: String,
-},
+    recycledAndRenewableContent: {
+        preConsumerRecycledNickel: {
+            type: String,
+            required: false // Champ non requis
+        },
+        preConsumerRecycledCobalt: {
+            type: String,
+            required: false // Champ non requis
+        },
+        preConsumerRecycledLithium: {
+            type: String,
+            required: false // Champ non requis
+        },
+        preConsumerRecycledLead: {
+            type: String,
+            required: false // Champ non requis
+        },
+        postConsumerRecycledNickel: {
+            type: String,
+            required: false // Champ non requis
+        },
+        postConsumerRecycledCobalt: {
+            type: String,
+            required: false // Champ non requis
+        },
+        postConsumerRecycledLithium: {
+            type: String,
+            required: false // Champ non requis
+        },
+        postConsumerRecycledLead: {
+            type: String,
+            required: false // Champ non requis
+        },
+        renewableContentShare: {
+            type: String,
+            required: false // Champ non requis
+        },
+    },
 
-// Sous-formulaire : endOfLifeInformation
-endOfLifeInformation:{
-  wastePrevention: String,
-  wasteBatteries: String,
-  separateCollection: String,
-},
+    endOfLifeInformation: {
+        wastePrevention: {
+            type: String, // Stocke le chemin du fichier pour la prévention des déchets
+            required: false // Champ non requis
+        },
+        wasteBatteries: {
+            type: String, // Stocke le chemin du fichier pour les batteries usagées
+            required: false // Champ non requis
+        },
+        separateCollection: {
+            type: String, // Stocke le chemin du fichier pour la collecte séparée
+            required: false // Champ non requis
+            
+        },
+        file: { type: String, required: false } // Ajoutez ce champ pour stocker le chemin du fichier
+    },
 });
 
-// Modèle de données pour Design of Circularity
-const DesignOfCircularityModel = mongoose.model('DesignOfCircularity', DesignCircularitySchema);
+// Créer le modèle à partir du schéma
+const DesignOfCircularityModel = model('DesignOfCircularity', DesignCircularitySchema);
 
 export default DesignOfCircularityModel;
-
-
-
-

@@ -1,54 +1,166 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Importation d'Axios
 import Headline from '../../layouts/form/headline';
 import ProgressBar from './progressbare';
 import Footerform from '../../layouts/form/footerform';
 
 function FormulaireDesignCircularity() {
+  const [formData, setFormData] = useState({
+    DesignofCircularity: {
+      postalAddress: '',
+      emailAddress: '',
+      webAddress: '',
+      partNumbers: '',
+      manualRemovalBattery: '',
+      manualDisassemblyBatteryPack: '',
+    },
+    batterySafetyRequirements: {
+      extinguishingAgent: '',
+      safetyMeasures: '',
+    },
+    recycledAndRenewableContent: {
+      preConsumerRecycledNickel: '',
+      preConsumerRecycledCobalt: '',
+      preConsumerRecycledLithium: '',
+      preConsumerRecycledLead: '',
+      postConsumerRecycledNickel: '',
+      postConsumerRecycledCobalt: '',
+      postConsumerRecycledLithium: '',
+      postConsumerRecycledLead: '',
+      renewableContentShare: '',
+    },
+    endOfLifeInformation: {
+      wastePrevention: '',
+      wasteBatteries: '',
+      separateCollection: '',
+    },
+    file: null // Pour le fichier
+  });
+
+  const [errorMessage, setErrorMessage] = useState('');
   const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
 
-  // État pour gérer l'affichage des tooltips
-  const [tooltips, setTooltips] = useState({
-    Postaladdress: false,
-    Emailaddress: false,
-    Webaddress: false,
-    Partnumbers: false,
-    ManualRemovalBattery: false,
-    ManualDisassemblyBatteryPack: false,
-    ExtinguishingAgent: false,
-    SafetyMeasures: false,
-    PreConsumerRecycledNickel: false,
-    PreConsumerRecycledCobalt: false,
-    PreConsumerRecycledLithium: false,
-    PreConsumerRecycledLead: false,
-    PostConsumerRecycledNickel: false,
-    PostConsumerRecyclecobat:false,
-    Renewablecontentshare:false,
-    Postconsumerrecycledleadshare:false,
-    Postconsumerrecycledlithiumshare:false,
-    wasteprevention:false,
-    wastebatteries:false,
-    separatecollection:false
-  });
+  const handleChange = (event) => {
+    const { name, value, files } = event.target;
 
-  const handleSubmit = () => {
-    setProgress(100);
-    // Logique de soumission du formulaire
+    if (name === 'file') {
+      setFormData(prevData => ({
+        ...prevData,
+        file: files[0] // Ajouter le fichier au state
+      }));
+    } else if (name.startsWith('DesignofCircularity')) {
+      const fieldName = name.replace('DesignofCircularity.', '');
+      setFormData(prevData => ({
+        ...prevData,
+        DesignofCircularity: {
+          ...prevData.DesignofCircularity,
+          [fieldName]: value
+        }
+      }));
+    } else if (name.startsWith('batterySafetyRequirements')) {
+      const fieldName = name.replace('batterySafetyRequirements.', '');
+      setFormData(prevData => ({
+        ...prevData,
+        batterySafetyRequirements: {
+          ...prevData.batterySafetyRequirements,
+          [fieldName]: value
+        }
+      }));
+    } else if (name.startsWith('recycledAndRenewableContent')) {
+      const fieldName = name.replace('recycledAndRenewableContent.', '');
+      setFormData(prevData => ({
+        ...prevData,
+        recycledAndRenewableContent: {
+          ...prevData.recycledAndRenewableContent,
+          [fieldName]: value
+        }
+      }));
+    } else if (name.startsWith('endOfLifeInformation')) {
+      const fieldName = name.replace('endOfLifeInformation.', '');
+      setFormData(prevData => ({
+        ...prevData,
+        endOfLifeInformation: {
+          ...prevData.endOfLifeInformation,
+          [fieldName]: value
+        }
+      }));
+    }
   };
 
-  const handleCancel = () => {
-    setProgress(0);
-    // Logique d'annulation du formulaire
+  const handleSubmit = async () => {
+    const form = new FormData();
+
+    // Ajouter les sous-documents au FormData
+    Object.keys(formData).forEach((key) => {
+      if (typeof formData[key] === 'object' && formData[key] !== null) {
+        Object.keys(formData[key]).forEach((subKey) => {
+          form.append(`${key}[${subKey}]`, formData[key][subKey]);
+        });
+      } else if (key === 'file' && formData[key]) {
+        form.append('file', formData[key]); // Ajouter le fichier au FormData
+      } else {
+        form.append(key, formData[key]);
+      }
+    });
+
+    try {
+      await axios.post('http://localhost:5555/api/design-circularity', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: (progressEvent) => {
+          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setProgress(percentCompleted);
+        }
+      });
+      return true; // Indiquer que la soumission a réussi
+    } catch (err) {
+      console.error('Erreur lors de la soumission du formulaire:', err);
+      setErrorMessage('Erreur lors de la soumission du formulaire. Veuillez réessayer.');
+      return false; // Indiquer que la soumission a échoué
+    }
   };
 
-  const handleNext = () => {
-    navigate('/batterymaterials');
+  const handleNext = async (event) => {
+    event.preventDefault(); // Empêcher le comportement par défaut du bouton
+    setProgress(100); // Mettre à jour la progression
+    const submissionSuccessful = await handleSubmit(); // Soumettre le formulaire et obtenir le résultat
+
+    if (submissionSuccessful) {
+      navigate('/batterymaterials'); // Redirection vers la page suivante en cas de succès
+    }
   };
 
   const handlePrevious = () => {
     navigate('/supplychain');
   };
+
+  
+
+  const [tooltips, setTooltips] = useState({
+    postalAddress: false,
+    emailAddress: false,
+    webAddress: false,
+    partNumbers: false,
+    manualRemovalBattery: false,
+    manualDisassemblyBatteryPack: false,
+    extinguishingAgent: false,
+    safetyMeasures: false,
+    preConsumerRecycledNickel: false,
+    preConsumerRecycledCobalt: false,
+    preConsumerRecycledLithium: false,
+    preConsumerRecycledLead: false,
+    postConsumerRecycledNickel: false,
+    postConsumerRecycledCobalt: false,
+    renewableContentShare: false,
+    postConsumerRecycledLeadShare: false,
+    postConsumerRecycledLithiumShare: false,
+    wastePrevention: false,
+    wasteBatteries: false,
+    separateCollection: false
+  });
 
   const handleMouseEnter = (type) => {
     setTooltips((prev) => ({ ...prev, [type]: true }));

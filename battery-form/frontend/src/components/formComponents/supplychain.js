@@ -117,13 +117,15 @@ function FormulaireSupplychain() {
             />
           </div>
        
-          {/* Boutons Next et Previous à la fin de la page */}
-          <div className="flex justify-center mt-4 space-x-4">
+          
+        </form>
+      </div>
+
+      {/* Boutons Next et Previous à la fin de la page */}
+      <div className="flex justify-center mt-4 space-x-4">
             <button onClick={handlePrevious} className="btn btn-gray px-2 py-2 mr-1">Previous</button>
             <button onClick={handleNext} className="btn btn-gray px-2 py-2 ml-1">Next</button>
           </div>
-        </form>
-      </div>
 
       {/* Intégration du FooterForm à la fin de la page */}
       <div className="mt-8"> {/* Ajout d'une marge supérieure pour l'espace */}

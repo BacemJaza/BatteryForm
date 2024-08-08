@@ -2,64 +2,76 @@ import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
-const BatteryMaterialSchema = new Schema({
+const batteryMaterialSchema = new Schema({
   batteryPassportIdentification: {
     type: String,
-    
+    required: false
   },
   batterieComponent: {
-    type: String,
-    
+    type: [String],
+    required: false
   },
   batteryRawMaterial: {
-    type: [String], // Assuming multiple raw materials can be added
-   
-  },
-  relatedIdentifiersOfTheCathodeAnodeElectrolyteMaterials: {
-    type: String,
-   
+    type: [String],
+    required: false
   },
   compositionOfTheCathodeAnodeElectrolyteMaterials: {
     type: String,
-   
+    required: false
   },
   nameOfHazardousSubstances: {
-    type: [String], // Assuming multiple hazardous substances can be added
-    
+    type: [String],
+    required: false
   },
   hazardClasses: {
     type: String,
-    
+    required: false
   },
   relatedIdentifiersOfHazardousSubstances: {
     type: String,
-   
+    required: false
   },
   locationOfHazardousSubstances: {
     type: String,
-    
+    required: false
   },
   concentrationRangeOfHazardousSubstances: {
     type: String,
-    
+    required: false
   },
   impactOfSubstancesOnTheEnvironmentHumanHealthSafety: {
-    type: [String], // Assuming multiple impacts can be listed
-    
+    type: String,
+    required: false
   },
   cathodeDescription: {
-    type: String
+    type: String,
+    required: false
   },
   anodeDescription: {
-    type: String
+    type: String,
+    required: false
   },
   electrolyteDescription: {
-    type: String
+    type: String,
+    required: false
+  },
+  relatedIdCathode: {
+    type: String,
+    required: false
+  },
+  relatedIdAnode: {
+    type: String,
+    required: false
+  },
+  relatedIdElectrolyte: {
+    type: String,
+    required: false
   }
 }, {
-  timestamps: true // Optional: adds createdAt and updatedAt fields
+  timestamps: true
 });
 
-const BatteryMaterial = model('BatteryMaterial', BatteryMaterialSchema);
 
-export default BatteryMaterial;
+const BatteryMaterialModel = model('BatteryMaterial', batteryMaterialSchema);
+
+export default BatteryMaterialModel;
